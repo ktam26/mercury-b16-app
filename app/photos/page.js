@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
@@ -17,13 +18,29 @@ export default function Photos() {
         {albumsData.length > 0 ? (
           <div className="space-y-4">
             {albumsData.map(album => (
-              <Card key={album.id} className="overflow-hidden">
+              <Card key={album.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
-                  {/* Placeholder for cover image */}
-                  <div className="w-full h-48 bg-gradient-to-br from-mercury-green to-green-800 flex items-center justify-center text-white">
-                    <div className="text-center">
-                      <p className="text-6xl mb-2">📷</p>
-                      <p className="text-lg font-semibold">{album.photoCount} photos</p>
+                  {/* Cover image */}
+                  <div className="w-full h-48 relative bg-gradient-to-br from-kelly-green to-green-800 overflow-hidden">
+                    {album.coverImage ? (
+                      <Image
+                        src={album.coverImage}
+                        alt={album.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-white">
+                        <div className="text-center">
+                          <p className="text-6xl mb-2">📷</p>
+                          <p className="text-lg font-semibold">{album.photoCount} photos</p>
+                        </div>
+                      </div>
+                    )}
+                    {/* Photo count badge overlay */}
+                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      {album.photoCount} photos
                     </div>
                   </div>
 
@@ -39,7 +56,7 @@ export default function Photos() {
                     )}
 
                     <Button
-                      className="w-full bg-mercury-green hover:bg-mercury-green/90"
+                      className="w-full bg-kelly-green hover:bg-kelly-green/90"
                       asChild
                     >
                       <a

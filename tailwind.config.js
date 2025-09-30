@@ -42,8 +42,11 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        kelly: {
+          green: '#00A550',
+          DEFAULT: '#00A550',
+        },
         mercury: {
-          green: '#00843D',
           black: '#1a1a1a',
         },
       },

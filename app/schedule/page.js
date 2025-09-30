@@ -1,16 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { GameCard } from '@/components/GameCard';
 import { getUpcomingGames, getPastGames } from '@/lib/game-utils';
 import gamesData from '@/data/games.json';
+import { logger } from '@/lib/logger';
 
 export default function Schedule() {
   const [activeTab, setActiveTab] = useState('upcoming');
 
   const upcomingGames = getUpcomingGames(gamesData, 99);
   const pastGames = getPastGames(gamesData);
+
+  useEffect(() => {
+    logger.pageView('Schedule');
+    logger.info(`Loaded ${upcomingGames.length} upcoming games, ${pastGames.length} past games`);
+  }, [upcomingGames.length, pastGames.length]);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    logger.click(`Schedule Tab: ${tab}`);
+  };
 
   return (
     <div className="pb-6">
@@ -23,7 +34,7 @@ export default function Schedule() {
 
       {/* Tabs */}
       <div className="px-4 pt-4">
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <Tabs value={activeTab} onValueChange={handleTabChange}>
           <TabsList className="w-full grid grid-cols-3 mb-4">
             <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
             <TabsTrigger value="past">Past</TabsTrigger>

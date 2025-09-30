@@ -1,10 +1,11 @@
 {
   "name": "Almaden Mercury Black B16",
-  "shortName": "Mercury B16",
+  "shortName": "Almaden Mercury Black 16",
   "ageGroup": "U10B (2016 birth year)",
   "colors": {
-    "primary": "black",
-    "secondary": "white"
+    "primary": "kelly-green",
+    "secondary": "black",
+    "accent": "white"
   },
   "managerPhone": "408-427-6672",
   "links": {

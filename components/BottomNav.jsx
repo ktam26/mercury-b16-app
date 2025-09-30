@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Calendar, Camera, Menu } from 'lucide-react';
+import { Home, Calendar, Camera } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function BottomNav() {
@@ -11,7 +11,6 @@ export function BottomNav() {
   const navItems = [
     { href: '/', icon: Home, label: 'Home' },
     { href: '/schedule', icon: Calendar, label: 'Schedule' },
-    { href: '/gameday', icon: Menu, label: 'Game Day' },
     { href: '/photos', icon: Camera, label: 'Photos' },
   ];
 
@@ -30,7 +29,7 @@ export function BottomNav() {
                 "flex flex-col items-center justify-center flex-1 h-full transition-colors",
                 "active:bg-gray-100",
                 isActive
-                  ? "text-mercury-green"
+                  ? "text-kelly-green"
                   : "text-gray-500"
               )}
             >

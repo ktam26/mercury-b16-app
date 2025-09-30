@@ -76,7 +76,7 @@ export function GameCard({ game }) {
         {/* Actions */}
         <div className="flex gap-2">
           <Button
-            className="flex-1 bg-mercury-green hover:bg-mercury-green/90"
+            className="flex-1 bg-kelly-green hover:bg-kelly-green/90"
             asChild
           >
             <Link href={`/game/${game.id}`}>
