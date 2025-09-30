@@ -1,0 +1,72 @@
+[
+  {
+    "id": "game-001",
+    "date": "2025-09-07",
+    "time": "2:15 PM",
+    "opponent": "Santa Clara Rush",
+    "opponentRecord": "0-1-0",
+    "opponentGoals": "2 for, 5 against",
+    "location": {
+      "name": "Pioneer High School",
+      "field": "Field 1C",
+      "address": "1485 Blossom Hill Rd, San Jose, CA 95123",
+      "googleMapsUrl": "https://www.google.com/maps/dir//1485+Blossom+Hill+Rd,+San+Jose,+CA+95123",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3175.2!2d-121.85!3d37.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e3190d1c1c1c1%3A0x1234567890!2sPioneer%20High%20School!5e0!3m2!1sen!2sus!4v1234567890!5m2!1sen!2sus"
+    },
+    "homeAway": "home",
+    "jersey": "black",
+    "socks": "black",
+    "result": {
+      "us": 3,
+      "them": 1,
+      "goalScorers": ["Arthur S (2)", "Ivan (1)"]
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?hour=14",
+    "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
+    "photoAlbumUrl": null
+  },
+  {
+    "id": "game-002",
+    "date": "2025-09-20",
+    "time": "10:30 AM",
+    "opponent": "Cupertino FC",
+    "opponentRecord": "1-2-0",
+    "opponentGoals": "13 for, 20 against",
+    "location": {
+      "name": "Creekside Park",
+      "field": "Creekside 2 7v7",
+      "address": "10455 Miller Ave, Cupertino, CA 95014",
+      "googleMapsUrl": "https://www.google.com/maps/dir//10455+Miller+Ave,+Cupertino,+CA+95014",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1586.5511615873693!2d-122.01548041058182!3d37.31640384259333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb574a96dd96d%3A0xc9081c6e682de4b1!2sCreekside%20Park!5e0!3m2!1sen!2sus!4v1758309369609!5m2!1sen!2sus"
+    },
+    "homeAway": "away",
+    "jersey": "white",
+    "socks": "white",
+    "result": null,
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95014?hour=10",
+    "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
+    "photoAlbumUrl": null
+  },
+  {
+    "id": "game-003",
+    "date": "2025-09-27",
+    "time": "2:15 PM",
+    "opponent": "Bay Area Surf",
+    "opponentRecord": "1-0-0",
+    "opponentGoals": "5 for, 3 against",
+    "location": {
+      "name": "Pioneer High School",
+      "field": "Field 1C",
+      "address": "1485 Blossom Hill Rd, San Jose, CA 95123",
+      "googleMapsUrl": "https://www.google.com/maps/dir//1485+Blossom+Hill+Rd,+San+Jose,+CA+95123",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3175.2!2d-121.85!3d37.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e3190d1c1c1c1%3A0x1234567890!2sPioneer%20High%20School!5e0!3m2!1sen!2sus!4v1234567890!5m2!1sen!2sus"
+    },
+    "homeAway": "home",
+    "jersey": "black",
+    "socks": "black",
+    "result": null,
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?hour=14",
+    "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
+    "photoAlbumUrl": null
+  }
+]

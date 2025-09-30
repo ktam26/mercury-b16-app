@@ -1,0 +1,14 @@
+{
+  "name": "Almaden Mercury Black B16",
+  "shortName": "Mercury B16",
+  "ageGroup": "U10B (2016 birth year)",
+  "colors": {
+    "primary": "black",
+    "secondary": "white"
+  },
+  "managerPhone": "408-427-6672",
+  "links": {
+    "gotsportSchedule": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
+    "gotsportStandings": "https://system.gotsport.com/org_event/events/44142/results?group=384051"
+  }
+}
