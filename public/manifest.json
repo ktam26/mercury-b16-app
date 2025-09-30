@@ -3,7 +3,9 @@
   "short_name": "Mercury B16",
   "description": "Almaden Mercury Black B16 Team App",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#00843D",
   "theme_color": "#00843D",
   "icons": [

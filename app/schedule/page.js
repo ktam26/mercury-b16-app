@@ -26,20 +26,37 @@ export default function Schedule() {
   return (
     <div className="pb-6">
       {/* Header */}
-      <div className="bg-white border-b sticky top-0 z-10">
+      <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
         <div className="px-4 py-4">
-          <h1 className="text-2xl font-bold">📅 Schedule</h1>
+          <h1 className="text-2xl font-bold text-gray-900">📅 Schedule</h1>
         </div>
       </div>
 
-      {/* Tabs */}
+      {/* Enhanced Tabs */}
       <div className="px-4 pt-4">
         <Tabs value={activeTab} onValueChange={handleTabChange}>
-          <TabsList className="w-full grid grid-cols-3 mb-4">
-            <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-            <TabsTrigger value="past">Past</TabsTrigger>
-            <TabsTrigger value="all">All</TabsTrigger>
-          </TabsList>
+          <div className="bg-gray-100 rounded-xl p-1 mb-4">
+            <TabsList className="w-full grid grid-cols-3 bg-transparent border-0 h-auto p-0">
+              <TabsTrigger
+                value="upcoming"
+                className="data-[state=active]:bg-white data-[state=active]:text-primary-green data-[state=active]:shadow-sm data-[state=active]:font-semibold rounded-lg py-2.5 text-sm transition-all"
+              >
+                Upcoming
+              </TabsTrigger>
+              <TabsTrigger
+                value="past"
+                className="data-[state=active]:bg-white data-[state=active]:text-primary-green data-[state=active]:shadow-sm data-[state=active]:font-semibold rounded-lg py-2.5 text-sm transition-all"
+              >
+                Past
+              </TabsTrigger>
+              <TabsTrigger
+                value="all"
+                className="data-[state=active]:bg-white data-[state=active]:text-primary-green data-[state=active]:shadow-sm data-[state=active]:font-semibold rounded-lg py-2.5 text-sm transition-all"
+              >
+                All
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="upcoming">
             {upcomingGames.length > 0 ? (

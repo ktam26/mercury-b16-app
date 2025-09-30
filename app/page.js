@@ -1,16 +1,23 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
-import { getNextGame, getUpcomingGames, getTimeUntilGame, formatGameDate } from '@/lib/game-utils';
+import { getNextGame, getUpcomingGames, formatGameDate, getShortTeamName } from '@/lib/game-utils';
+import { useCountdown, useMounted } from '@/hooks/useCountdown';
 import gamesData from '@/data/games.json';
 import teamInfo from '@/data/team-info.json';
+import { cn } from '@/lib/utils';
 
 export default function Home() {
   const nextGame = getNextGame(gamesData);
   const upcomingGames = getUpcomingGames(gamesData, 3);
-  const timeUntil = nextGame ? getTimeUntilGame(nextGame) : null;
+  const timeUntil = useCountdown(nextGame);
+  const mounted = useMounted();
+  const homeShortName = getShortTeamName(teamInfo.name);
+  const nextOpponentShortName = nextGame ? getShortTeamName(nextGame.opponent) : '';
 
   // Calculate current record from past games
   const pastGames = gamesData.filter(g => g.result);
@@ -41,77 +48,213 @@ export default function Home() {
 
       {/* Next Game Hero */}
       {nextGame && (
-        <Card className="mb-6 bg-gradient-to-br from-kelly-green to-green-800 text-white overflow-hidden shadow-xl shadow-kelly-green/20">
-          <CardContent className="pt-6">
-            <p className="text-sm opacity-90 mb-2 uppercase tracking-wider font-semibold">⚽ Next Game</p>
-            <h2 className="text-3xl font-bold mb-4">vs {nextGame.opponent}</h2>
+        <Card className="mb-6 bg-gradient-to-br from-primary-green to-primary-green-light text-white overflow-hidden shadow-green relative">
+          <div className="stadium-lights" />
+          <CardContent className="pt-6 relative z-10">
+            <div className="flex justify-between items-center mb-4">
+              <p className="text-sm opacity-90 uppercase tracking-wider font-semibold">⚽ Next Game</p>
+              <span className="px-3 py-1 bg-white/20 backdrop-blur-xs rounded-full text-xs font-semibold">
+                {nextGame.homeAway === 'home' ? 'HOME' : 'AWAY'}
+              </span>
+            </div>
 
-            {timeUntil && (
-              <div className="text-5xl font-bold mb-5 tracking-tight">
-                {timeUntil.days}d {timeUntil.hours}h {timeUntil.minutes}m
+            {/* Teams Display */}
+            <div className="flex items-center justify-center gap-6 mb-6 animate-scale-in">
+              <div className="text-center">
+                <div className="w-15 h-15 bg-white rounded-full mb-2 mx-auto shadow-md flex items-center justify-center p-2">
+                  <Image
+                    src="/afc-logo.png"
+                    alt="Almaden FC"
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                <p className="text-sm font-semibold opacity-95">{homeShortName}</p>
+              </div>
+
+              <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center font-bold text-lg shadow-inner">
+                VS
+              </div>
+
+              <div className="text-center">
+                <div className="w-15 h-15 bg-white rounded-full mb-2 mx-auto shadow-md flex items-center justify-center p-2">
+                  <Image
+                    src={
+                      nextGame.homeAway === 'home'
+                        ? (nextGame.teamLogos?.away || "/images/logos/default.png")
+                        : (nextGame.teamLogos?.home || "/images/logos/default.png")
+                    }
+                    alt={nextGame.opponent}
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                  />
+                </div>
+                <p className="text-sm font-semibold opacity-95 line-clamp-2 max-w-[80px]">
+                  {nextOpponentShortName}
+                </p>
+              </div>
+            </div>
+
+            {/* Countdown Timer */}
+            {mounted && timeUntil && (
+              <div
+                className="countdown-container flex gap-2 justify-center mb-6"
+                role="timer"
+                aria-live="polite"
+                aria-label={`Time until next game: ${timeUntil.days} days, ${timeUntil.hours} hours, ${timeUntil.minutes} minutes`}
+              >
+                <div className="bg-white/15 backdrop-blur-xs rounded-xl px-4 py-3 min-w-[70px] text-center">
+                  <span className="text-2xl font-bold block">{timeUntil.days}</span>
+                  <span className="text-xs opacity-80 uppercase tracking-wider">Days</span>
+                </div>
+                <div className="bg-white/15 backdrop-blur-xs rounded-xl px-4 py-3 min-w-[70px] text-center">
+                  <span className="text-2xl font-bold block">{timeUntil.hours}</span>
+                  <span className="text-xs opacity-80 uppercase tracking-wider">Hours</span>
+                </div>
+                <div className="bg-white/15 backdrop-blur-xs rounded-xl px-4 py-3 min-w-[70px] text-center">
+                  <span className="text-2xl font-bold block">{timeUntil.minutes}</span>
+                  <span className="text-xs opacity-80 uppercase tracking-wider">Minutes</span>
+                </div>
               </div>
             )}
 
-            <div className="text-sm space-y-2 opacity-95 mb-6">
-              <p className="font-medium">{formatGameDate(nextGame.date)} • {nextGame.time}</p>
-              <p>📍 {nextGame.location.name}</p>
-              <p>👕 {nextGame.jersey.charAt(0).toUpperCase() + nextGame.jersey.slice(1)} Jersey • {nextGame.socks.charAt(0).toUpperCase() + nextGame.socks.slice(1)} Socks</p>
+            {/* Loading placeholder for countdown */}
+            {!mounted && nextGame && (
+              <div className="countdown-container flex gap-2 justify-center mb-6">
+                <div className="bg-white/15 backdrop-blur-xs rounded-xl px-4 py-3 min-w-[70px] text-center">
+                  <span className="text-2xl font-bold block">--</span>
+                  <span className="text-xs opacity-80 uppercase tracking-wider">Days</span>
+                </div>
+                <div className="bg-white/15 backdrop-blur-xs rounded-xl px-4 py-3 min-w-[70px] text-center">
+                  <span className="text-2xl font-bold block">--</span>
+                  <span className="text-xs opacity-80 uppercase tracking-wider">Hours</span>
+                </div>
+                <div className="bg-white/15 backdrop-blur-xs rounded-xl px-4 py-3 min-w-[70px] text-center">
+                  <span className="text-2xl font-bold block">--</span>
+                  <span className="text-xs opacity-80 uppercase tracking-wider">Minutes</span>
+                </div>
+              </div>
+            )}
+
+            {/* Game Info Pills */}
+            <div className="flex flex-wrap gap-2 justify-center mb-6">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-xs rounded-full text-xs">
+                <span>📅</span>
+                <span>{formatGameDate(nextGame.date)} • {nextGame.time}</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-xs rounded-full text-xs">
+                <span>📍</span>
+                <span>{nextGame.location.name}</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-xs rounded-full text-xs">
+                <span>👕</span>
+                <span>{nextGame.jersey.charAt(0).toUpperCase() + nextGame.jersey.slice(1)} / {nextGame.socks.charAt(0).toUpperCase() + nextGame.socks.slice(1)}</span>
+              </div>
             </div>
 
-            <Button
-              className="w-full bg-white text-kelly-green hover:bg-gray-50 font-semibold shadow-md transition-transform active:scale-[0.98]"
-              asChild
+            <Link
+              href={`/game/${nextGame.id}`}
+              className={cn(
+                buttonVariants({ variant: 'default', size: 'default' }),
+                'w-full bg-white text-primary-green hover:bg-gray-50 font-semibold shadow-md transition-transform active:scale-[0.98]'
+              )}
             >
-              <Link href={`/game/${nextGame.id}`}>
-                View Game Details
-              </Link>
-            </Button>
+              View Game Details
+            </Link>
           </CardContent>
         </Card>
       )}
 
-      {/* Team Stats */}
+      {/* Team Stats Enhanced */}
       {pastGames.length > 0 && (
-        <Card className="mb-6 shadow-md">
+        <Card className="mb-6 shadow-md border-0">
           <CardContent className="pt-5">
             <h3 className="text-sm font-bold text-gray-500 mb-4 uppercase tracking-wider">
-              📊 Season Record
+              📊 Season Statistics
             </h3>
-            <div className="grid grid-cols-2 gap-6 mb-4">
-              <div className="text-center">
-                <p className="text-4xl font-extrabold text-kelly-green mb-1">{wins}-{losses}-{ties}</p>
-                <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Win-Loss-Tie</p>
+
+            {/* Main Stats Grid */}
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border border-gray-100 hover:border-primary-green hover:shadow-sm transition-all">
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Record</p>
+                <p className="text-3xl font-extrabold text-primary-green">{wins}-{losses}-{ties}</p>
+
+                {/* Win percentage */}
+                {pastGames.length > 0 && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    {Math.round((wins / pastGames.length) * 100)}% Win Rate
+                  </p>
+                )}
               </div>
-              <div className="text-center">
-                <p className={`text-4xl font-extrabold mb-1 ${goalDiff > 0 ? 'text-kelly-green' : goalDiff < 0 ? 'text-red-500' : 'text-gray-600'}`}>
+
+              <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border border-gray-100 hover:border-primary-green hover:shadow-sm transition-all">
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Goal Diff</p>
+                <p className={`text-3xl font-extrabold ${goalDiff > 0 ? 'text-win' : goalDiff < 0 ? 'text-loss' : 'text-tie'}`}>
                   {goalDiff > 0 ? '+' : ''}{goalDiff}
                 </p>
-                <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Goal Diff</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  {Math.round(totalGoalsFor / pastGames.length * 10) / 10} avg/game
+                </p>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6 pt-4 border-t border-gray-100">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-gray-700">{totalGoalsFor}</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wide">Goals For</p>
+
+            {/* Secondary Stats */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-green-50 p-4 rounded-xl border border-green-200 hover:shadow-sm transition-all">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-2xl">⚽</span>
+                  <span className="text-2xl font-bold text-green-900">{totalGoalsFor}</span>
+                </div>
+                <p className="text-xs text-green-700 uppercase tracking-wide">Goals Scored</p>
               </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-gray-700">{totalGoalsAgainst}</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wide">Goals Against</p>
+
+              <div className="bg-red-50 p-4 rounded-xl border border-red-200 hover:shadow-sm transition-all">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-2xl">🥅</span>
+                  <span className="text-2xl font-bold text-red-900">{totalGoalsAgainst}</span>
+                </div>
+                <p className="text-xs text-red-700 uppercase tracking-wide">Goals Against</p>
               </div>
             </div>
+
+            {/* Recent Form Indicator */}
+            {pastGames.length >= 3 && (
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Last 5 Games</p>
+                <div className="flex gap-1">
+                  {pastGames.slice(-5).map((game, index) => {
+                    const isWin = game.result.us > game.result.them;
+                    const isLoss = game.result.us < game.result.them;
+                    return (
+                      <div
+                        key={index}
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white ${
+                          isWin ? 'bg-win' : isLoss ? 'bg-loss' : 'bg-tie'
+                        }`}
+                      >
+                        {isWin ? 'W' : isLoss ? 'L' : 'T'}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}
 
-      {/* Upcoming Games Preview */}
-      <Card className="mb-6 shadow-md">
+      {/* Upcoming Games Preview Enhanced */}
+      <Card className="mb-6 shadow-md border-0">
         <CardContent className="pt-5">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">
               📅 Upcoming Games
             </h3>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/schedule" className="text-kelly-green font-semibold hover:text-kelly-green/80">
+            <Button variant="ghost" size="sm" asChild className="hover:bg-primary-green/10">
+              <Link href="/schedule" className="text-primary-green font-semibold">
                 View All →
               </Link>
             </Button>
@@ -121,16 +264,25 @@ export default function Home() {
               <Link
                 key={game.id}
                 href={`/game/${game.id}`}
-                className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors active:scale-[0.98]"
+                className="block p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-200 hover:border-primary-green hover:shadow-md transition-all active:scale-[0.98]"
               >
-                <div className="flex justify-between items-start mb-1">
-                  <p className="text-xs text-gray-500">{formatGameDate(game.date)}</p>
-                  <span className={`text-xs font-semibold ${game.homeAway === 'home' ? 'text-green-600' : 'text-gray-600'}`}>
+                <div className="flex justify-between items-start mb-2">
+                  <p className="text-xs text-gray-500 font-medium">{formatGameDate(game.date)}</p>
+                  <span className={`text-xs font-bold px-2 py-1 rounded-full ${
+                    game.homeAway === 'home'
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-gray-100 text-gray-700'
+                  }`}>
                     {game.homeAway === 'home' ? 'HOME' : 'AWAY'}
                   </span>
                 </div>
-                <p className="font-semibold">{game.time} vs {game.opponent}</p>
-                <p className="text-xs text-gray-600 mt-1">📍 {game.location.name}</p>
+                <p className="font-bold text-gray-900 mb-1">
+                  {game.time} <span className="text-gray-500 font-normal">vs</span> {game.opponent}
+                </p>
+                <div className="flex items-center gap-1 text-xs text-gray-600">
+                  <span>📍</span>
+                  <span>{game.location.name}</span>
+                </div>
               </Link>
             ))}
           </div>

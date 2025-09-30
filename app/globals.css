@@ -10,20 +10,40 @@
     --card-foreground: 0 0% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
-    --primary: 145 100% 32%;
+    --primary: 145 100% 26%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
-    --accent: 145 100% 32%;
+    --accent: 145 100% 26%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 145 100% 32%;
+    --ring: 145 100% 26%;
     --radius: 0.5rem;
+
+    /* Custom color variables */
+    --primary-green: #00843D;
+    --primary-green-light: #047857;
+    --primary-green-dark: #00632E;
+    --accent-gold: #FFC107;
+    --danger-red: #DC2626;
+    --info-blue: #0EA5E9;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F9FAFB;
+    --bg-tertiary: #F1F5F9;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --text-tertiary: #9CA3AF;
+    --border-color: #E5E7EB;
+    --home-badge: #00843D;
+    --away-badge: #F59E0B;
+    --win-color: #10B981;
+    --loss-color: #EF4444;
+    --tie-color: #6B7280;
   }
 }
 
@@ -34,7 +54,97 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Loading States */
+.skeleton-loader {
+  background: linear-gradient(
+    90deg,
+    #F3F4F6 25%,
+    #E5E7EB 50%,
+    #F3F4F6 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* Touch Feedback */
+.touchable {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.touchable:active {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+/* Card Press Effect */
+.card-press:active {
+  transform: scale(0.98);
+  transition: transform 100ms ease;
+}
+
+/* Success Animation */
+.success-checkmark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #10B981;
+  position: relative;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.checkmark-path {
+  stroke: white;
+  stroke-width: 3;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: drawCheck 0.3s 0.3s ease-out forwards;
 }
 
 /* Safe area padding for iOS notch */
@@ -46,6 +156,11 @@
   padding-top: env(safe-area-inset-top);
 }
 
+.app-container {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 /* Prevent zoom on input focus (iOS) */
 input, select, textarea {
   font-size: 16px;
@@ -54,9 +169,119 @@ input, select, textarea {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Touch action */
 button, a {
   touch-action: manipulation;
+}
+
+/* CSS Containment for better performance */
+.game-card {
+  contain: layout style paint;
+}
+
+/* Gradient Overlays */
+.gradient-overlay {
+  background: linear-gradient(135deg, #00843D 0%, #047857 100%);
+}
+
+.gradient-overlay-dark {
+  background: linear-gradient(180deg, #00843D 0%, #047857 100%);
+}
+
+/* Stadium Lights Effect */
+.stadium-lights {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200%;
+  height: 100px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Form Dots */
+.form-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.form-dot.win { background: #10B981; }
+.form-dot.loss { background: #EF4444; }
+.form-dot.tie { background: #6B7280; }
+
+/* Custom Focus Styles */
+.focus-visible:focus {
+  outline: 2px solid #00843D;
+  outline-offset: 2px;
+}
+
+/* Pull to Refresh Indicator */
+.pull-to-refresh-indicator {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.refresh-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #E5E7EB;
+  border-top-color: #00843D;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Desktop Responsive */
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding: 0 32px;
+    margin: 0 auto;
+  }
+
+  .desktop-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr 320px;
+    gap: 24px;
+  }
+
+  .sidebar-left,
+  .sidebar-right {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+  }
+
+  .main-content {
+    min-height: 100vh;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
 }
