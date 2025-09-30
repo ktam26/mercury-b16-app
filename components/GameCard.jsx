@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Navigation } from 'lucide-react';
@@ -10,7 +11,10 @@ import { formatGameDate } from '@/lib/game-utils';
 import { cn } from '@/lib/utils';
 import teamInfo from '@/data/team-info.json';
 
+const DEFAULT_LOGO = '/images/logos/default.png';
+
 export function GameCard({ game }) {
+  const [logoError, setLogoError] = useState({ home: false, away: false });
   const isPast = game.result !== null;
   const isWin = isPast && game.result.us > game.result.them;
   const isLoss = isPast && game.result.us < game.result.them;
@@ -43,10 +47,15 @@ export function GameCard({ game }) {
             {/* Left Logo */}
             <div className="relative w-12 h-12 flex-shrink-0">
               <Image
-                src={game.homeAway === 'home' ? game.teamLogos.home : game.teamLogos.away}
+                src={logoError.home
+                  ? DEFAULT_LOGO
+                  : (game.teamLogos?.[game.homeAway === 'home' ? 'home' : 'away'] || DEFAULT_LOGO)
+                }
                 alt="Almaden Mercury Black B16"
                 fill
+                sizes="48px"
                 className="object-contain"
+                onError={() => setLogoError(prev => ({ ...prev, home: true }))}
               />
             </div>
 
@@ -60,10 +69,15 @@ export function GameCard({ game }) {
             {/* Right Logo */}
             <div className="relative w-12 h-12 flex-shrink-0">
               <Image
-                src={game.homeAway === 'home' ? game.teamLogos.away : game.teamLogos.home}
+                src={logoError.away
+                  ? DEFAULT_LOGO
+                  : (game.teamLogos?.[game.homeAway === 'home' ? 'away' : 'home'] || DEFAULT_LOGO)
+                }
                 alt={game.opponent}
                 fill
+                sizes="48px"
                 className="object-contain"
+                onError={() => setLogoError(prev => ({ ...prev, away: true }))}
               />
             </div>
           </div>

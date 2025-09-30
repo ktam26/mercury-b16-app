@@ -60,6 +60,7 @@ export default async function GameDetail({ params }) {
                       src={game.homeAway === 'home' ? game.teamLogos.home : game.teamLogos.away}
                       alt="Mercury Black B16"
                       fill
+                      sizes="80px"
                       className="object-contain p-1"
                     />
                   </div>
@@ -81,6 +82,7 @@ export default async function GameDetail({ params }) {
                       src={game.homeAway === 'home' ? game.teamLogos.away : game.teamLogos.home}
                       alt={game.opponent}
                       fill
+                      sizes="80px"
                       className="object-contain p-1"
                     />
                   </div>
@@ -163,6 +165,7 @@ export default async function GameDetail({ params }) {
                     src={game.homeAway === 'home' ? game.teamLogos.home : game.teamLogos.away}
                     alt="Mercury Black B16"
                     fill
+                    sizes="64px"
                     className="object-contain"
                   />
                 </div>
@@ -175,6 +178,7 @@ export default async function GameDetail({ params }) {
                     src={game.homeAway === 'home' ? game.teamLogos.away : game.teamLogos.home}
                     alt={game.opponent}
                     fill
+                    sizes="64px"
                     className="object-contain"
                   />
                 </div>

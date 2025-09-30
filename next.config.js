@@ -8,7 +8,38 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   images: {
-    domains: ['shotsbyryanq.pixieset.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'shotsbyryanq.pixieset.com',
+        pathname: '/**',
+      },
+    ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+    ];
   },
 };
 

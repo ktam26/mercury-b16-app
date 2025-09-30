@@ -95,9 +95,9 @@
     "location": {
       "name": "Washington Elementary School",
       "field": "Full Field",
-      "address": "13025 Murphy Ave, San Martin, CA 95046",
-      "googleMapsUrl": "https://www.google.com/maps/dir//13025+Murphy+Ave,+San+Martin,+CA+95046",
-      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3189.234!2d-121.567!3d37.087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e2e8a1c1c1c1c%3A0x1234567890abcdef!2s13025%20Murphy%20Ave%2C%20San%20Martin%2C%20CA%2095046!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+      "address": "100 Oak St, San Jose, CA 95110",
+      "googleMapsUrl": "https://www.google.com/maps/dir//100+Oak+St,+San+Jose,+CA+95110",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.8!2d-121.877!3d37.339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcca1c1c1c1c1%3A0x1234567890abcdef!2s100%20Oak%20St%2C%20San%20Jose%2C%20CA%2095110!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
     },
     "homeAway": "away",
     "jersey": "white",
@@ -164,9 +164,9 @@
     "location": {
       "name": "Church on the Hill",
       "field": "7v7 Field",
-      "address": "17200 Santa Rosa Dr, Los Gatos, CA 95032",
-      "googleMapsUrl": "https://www.google.com/maps/dir//17200+Santa+Rosa+Dr,+Los+Gatos,+CA+95032",
-      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3171.789!2d-121.993!3d37.186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e734a1c1c1c1c%3A0xabcdef1234567890!2s17200%20Santa%20Rosa%20Dr%2C%20Los%20Gatos%2C%20CA%2095032!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+      "address": "500 Sands Dr, San Jose, CA 95125",
+      "googleMapsUrl": "https://www.google.com/maps/dir//500+Sands+Dr,+San+Jose,+CA+95125",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3173.234!2d-121.898!3d37.304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e33a1c1c1c1c1%3A0xabcdef1234567890!2s500%20Sands%20Dr%2C%20San%20Jose%2C%20CA%2095125!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
     },
     "homeAway": "away",
     "jersey": "white",
@@ -233,9 +233,9 @@
     "location": {
       "name": "Latimer School",
       "field": "9v9 Turf Field",
-      "address": "19370 Cox Ave, Saratoga, CA 95070",
-      "googleMapsUrl": "https://www.google.com/maps/dir//19370+Cox+Ave,+Saratoga,+CA+95070",
-      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.456!2d-122.033!3d37.267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e449a1c1c1c1c%3A0x9876543210fedcba!2s19370%20Cox%20Ave%2C%20Saratoga%2C%20CA%2095070!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+      "address": "4250 Latimer Ave, San Jose, CA 95130",
+      "googleMapsUrl": "https://www.google.com/maps/dir//4250+Latimer+Ave,+San+Jose,+CA+95130",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170.123!2d-121.954!3d37.317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcc7a1c1c1c1c%3A0x9876543210fedcba!2s4250%20Latimer%20Ave%2C%20San%20Jose%2C%20CA%2095130!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
     },
     "homeAway": "away",
     "jersey": "white",
@@ -269,9 +269,9 @@
     "location": {
       "name": "Reed and Grant Sports Park",
       "field": "Field #5",
-      "address": "1950 Lafayette St, Santa Clara, CA 95050",
-      "googleMapsUrl": "https://www.google.com/maps/dir//1950+Lafayette+St,+Santa+Clara,+CA+95050",
-      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.234!2d-121.944!3d37.354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb7a1c1c1c1c1%3A0xfedcba0987654321!2s1950%20Lafayette%20St%2C%20Santa%20Clara%2C%20CA%2095050!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+      "address": "750 Reed St, Santa Clara, CA 95050",
+      "googleMapsUrl": "https://www.google.com/maps/dir//750+Reed+St,+Santa+Clara,+CA+95050",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.567!2d-121.962!3d37.348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb7a1c1c1c1c1%3A0xfedcba0987654321!2s750%20Reed%20St%2C%20Santa%20Clara%2C%20CA%2095050!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
     },
     "homeAway": "away",
     "jersey": "white",
