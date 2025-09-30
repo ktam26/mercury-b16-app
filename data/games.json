@@ -4,8 +4,15 @@
     "date": "2025-09-07",
     "time": "2:15 PM",
     "opponent": "Santa Clara Rush 2016B Cougars - Blue",
-    "opponentRecord": "",
+    "mercuryRecord": "0-0-0",
+    "opponentRecord": "1-3-0",
     "opponentGoals": "",
+    "mercuryRecentResults": [],
+    "opponentRecentResults": [
+      { "date": "2025-08-31", "opponent": "Los Gatos United", "score": "2-5", "result": "L" },
+      { "date": "2025-09-27", "opponent": "Bay Area Surf", "score": "5-1", "result": "W" },
+      { "date": "2025-09-28", "opponent": "Allstars United", "score": "2-3", "result": "L" }
+    ],
     "location": {
       "name": "Pioneer High School",
       "field": "Field 1C",
@@ -21,7 +28,11 @@
       "them": 1,
       "goalScorers": ["Arthur S (2)", "Ivan (1)"]
     },
-    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?hour=14",
+    "teamLogos": {
+      "home": "/images/logos/mercury-b16.png",
+      "away": "/images/logos/santa-clara-rush.png"
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?day=1&hour=14",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
     "photoAlbumUrl": null
   },
@@ -30,8 +41,17 @@
     "date": "2025-09-20",
     "time": "10:30 AM",
     "opponent": "Cupertino FC Flames 16B",
-    "opponentRecord": "",
+    "mercuryRecord": "1-0-0",
+    "opponentRecord": "1-2-1",
     "opponentGoals": "",
+    "mercuryRecentResults": [
+      { "date": "2025-09-07", "opponent": "Santa Clara Rush", "score": "3-1", "result": "W" }
+    ],
+    "opponentRecentResults": [
+      { "date": "2025-08-16", "opponent": "Allstars United", "score": "6-0", "result": "W" },
+      { "date": "2025-08-17", "opponent": "Los Gatos United", "score": "2-14", "result": "L" },
+      { "date": "2025-09-06", "opponent": "ESJFC Latinos White", "score": "5-6", "result": "L" }
+    ],
     "location": {
       "name": "Creekside Park",
       "field": "Creekside 2 7v7",
@@ -47,7 +67,11 @@
       "them": 3,
       "goalScorers": []
     },
-    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95014?hour=10",
+    "teamLogos": {
+      "home": "/images/logos/cupertino-flames.png",
+      "away": "/images/logos/mercury-b16.png"
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95014?day=1&hour=10",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
     "photoAlbumUrl": "https://shotsbyryanq.pixieset.com/almadenfcmercury16blackvscupertinofcflames16b/"
   },
@@ -56,20 +80,34 @@
     "date": "2025-10-05",
     "time": "10:30 AM",
     "opponent": "East San Jose FC ESJFC 16B Latinos White",
-    "opponentRecord": "",
+    "mercuryRecord": "1-0-1",
+    "opponentRecord": "2-1-0",
     "opponentGoals": "",
+    "mercuryRecentResults": [
+      { "date": "2025-09-07", "opponent": "Santa Clara Rush", "score": "3-1", "result": "W" },
+      { "date": "2025-09-20", "opponent": "Cupertino FC Flames", "score": "3-3", "result": "D" }
+    ],
+    "opponentRecentResults": [
+      { "date": "2025-08-24", "opponent": "Allstars United", "score": "4-1", "result": "W" },
+      { "date": "2025-09-06", "opponent": "Cupertino FC Flames", "score": "6-5", "result": "W" },
+      { "date": "2025-09-13", "opponent": "Los Gatos United", "score": "2-4", "result": "L" }
+    ],
     "location": {
       "name": "Washington Elementary School",
       "field": "Full Field",
       "address": "13025 Murphy Ave, San Martin, CA 95046",
       "googleMapsUrl": "https://www.google.com/maps/dir//13025+Murphy+Ave,+San+Martin,+CA+95046",
-      "embedUrl": ""
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3189.234!2d-121.567!3d37.087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e2e8a1c1c1c1c%3A0x1234567890abcdef!2s13025%20Murphy%20Ave%2C%20San%20Martin%2C%20CA%2095046!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
     },
     "homeAway": "away",
     "jersey": "white",
     "socks": "white",
     "result": null,
-    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95046?hour=10",
+    "teamLogos": {
+      "home": "/images/logos/east-san-jose-fc.png",
+      "away": "/images/logos/mercury-b16.png"
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95046?day=1&hour=10",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
     "photoAlbumUrl": null
   },
@@ -78,8 +116,17 @@
     "date": "2025-10-12",
     "time": "3:30 PM",
     "opponent": "Los Gatos United 2016B Academy Black",
-    "opponentRecord": "",
+    "mercuryRecord": "1-0-1",
+    "opponentRecord": "3-0-0",
     "opponentGoals": "",
+    "mercuryRecentResults": [
+      { "date": "2025-09-07", "opponent": "Santa Clara Rush", "score": "3-1", "result": "W" },
+      { "date": "2025-09-20", "opponent": "Cupertino FC Flames", "score": "3-3", "result": "D" }
+    ],
+    "opponentRecentResults": [
+      { "date": "2025-08-17", "opponent": "Cupertino FC Flames", "score": "14-2", "result": "W" },
+      { "date": "2025-08-31", "opponent": "Santa Clara Rush", "score": "5-2", "result": "W" }
+    ],
     "location": {
       "name": "Pioneer High School",
       "field": "Field 1C",
@@ -91,7 +138,11 @@
     "jersey": "black",
     "socks": "black",
     "result": null,
-    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?hour=15",
+    "teamLogos": {
+      "home": "/images/logos/mercury-b16.png",
+      "away": "/images/logos/los-gatos-united.png"
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?day=1&hour=15",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
     "photoAlbumUrl": null
   },
@@ -100,20 +151,32 @@
     "date": "2025-10-19",
     "time": "3:10 PM",
     "opponent": "Bay Area Surf 16B Academy I",
-    "opponentRecord": "",
+    "mercuryRecord": "1-0-1",
+    "opponentRecord": "1-1-0",
     "opponentGoals": "",
+    "mercuryRecentResults": [
+      { "date": "2025-09-07", "opponent": "Santa Clara Rush", "score": "3-1", "result": "W" },
+      { "date": "2025-09-20", "opponent": "Cupertino FC Flames", "score": "3-3", "result": "D" }
+    ],
+    "opponentRecentResults": [
+      { "date": "2025-09-27", "opponent": "Santa Clara Rush", "score": "1-5", "result": "L" }
+    ],
     "location": {
       "name": "Church on the Hill",
       "field": "7v7 Field",
       "address": "17200 Santa Rosa Dr, Los Gatos, CA 95032",
       "googleMapsUrl": "https://www.google.com/maps/dir//17200+Santa+Rosa+Dr,+Los+Gatos,+CA+95032",
-      "embedUrl": ""
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3171.789!2d-121.993!3d37.186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e734a1c1c1c1c%3A0xabcdef1234567890!2s17200%20Santa%20Rosa%20Dr%2C%20Los%20Gatos%2C%20CA%2095032!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
     },
     "homeAway": "away",
     "jersey": "white",
     "socks": "white",
     "result": null,
-    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95032?hour=15",
+    "teamLogos": {
+      "home": "/images/logos/bay-area-surf.png",
+      "away": "/images/logos/mercury-b16.png"
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95032?day=1&hour=15",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
     "photoAlbumUrl": null
   },
@@ -122,8 +185,17 @@
     "date": "2025-11-01",
     "time": "11:45 AM",
     "opponent": "Allstars United 16B Pre-Academy",
-    "opponentRecord": "",
+    "mercuryRecord": "1-0-1",
+    "opponentRecord": "1-2-0",
     "opponentGoals": "",
+    "mercuryRecentResults": [
+      { "date": "2025-09-07", "opponent": "Santa Clara Rush", "score": "3-1", "result": "W" },
+      { "date": "2025-09-20", "opponent": "Cupertino FC Flames", "score": "3-3", "result": "D" }
+    ],
+    "opponentRecentResults": [
+      { "date": "2025-08-16", "opponent": "Cupertino FC Flames", "score": "0-6", "result": "L" },
+      { "date": "2025-09-28", "opponent": "Santa Clara Rush", "score": "3-2", "result": "W" }
+    ],
     "location": {
       "name": "Pioneer High School",
       "field": "Field 1C",
@@ -135,7 +207,11 @@
     "jersey": "black",
     "socks": "black",
     "result": null,
-    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?hour=11",
+    "teamLogos": {
+      "home": "/images/logos/mercury-b16.png",
+      "away": "/images/logos/allstars-united.png"
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?day=1&hour=11",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
     "photoAlbumUrl": null
   },
@@ -144,20 +220,32 @@
     "date": "2025-11-08",
     "time": "11:00 AM",
     "opponent": "West Valley United 016B Red",
-    "opponentRecord": "",
+    "mercuryRecord": "1-0-1",
+    "opponentRecord": "0-1-0",
     "opponentGoals": "",
+    "mercuryRecentResults": [
+      { "date": "2025-09-07", "opponent": "Santa Clara Rush", "score": "3-1", "result": "W" },
+      { "date": "2025-09-20", "opponent": "Cupertino FC Flames", "score": "3-3", "result": "D" }
+    ],
+    "opponentRecentResults": [
+      { "date": "2025-09-14", "opponent": "Bay Area Surf", "score": "5-6", "result": "L" }
+    ],
     "location": {
       "name": "Latimer School",
       "field": "9v9 Turf Field",
       "address": "19370 Cox Ave, Saratoga, CA 95070",
       "googleMapsUrl": "https://www.google.com/maps/dir//19370+Cox+Ave,+Saratoga,+CA+95070",
-      "embedUrl": ""
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.456!2d-122.033!3d37.267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e449a1c1c1c1c%3A0x9876543210fedcba!2s19370%20Cox%20Ave%2C%20Saratoga%2C%20CA%2095070!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
     },
     "homeAway": "away",
     "jersey": "white",
     "socks": "white",
     "result": null,
-    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95070?hour=11",
+    "teamLogos": {
+      "home": "/images/logos/west-valley-united.png",
+      "away": "/images/logos/mercury-b16.png"
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95070?day=1&hour=11",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
     "photoAlbumUrl": null
   },
@@ -166,20 +254,34 @@
     "date": "2025-11-09",
     "time": "11:30 AM",
     "opponent": "Santa Clara Rush 2016B Cougars - Blue",
-    "opponentRecord": "",
+    "mercuryRecord": "1-0-1",
+    "opponentRecord": "1-3-0",
     "opponentGoals": "",
+    "mercuryRecentResults": [
+      { "date": "2025-09-07", "opponent": "Santa Clara Rush", "score": "3-1", "result": "W" },
+      { "date": "2025-09-20", "opponent": "Cupertino FC Flames", "score": "3-3", "result": "D" }
+    ],
+    "opponentRecentResults": [
+      { "date": "2025-08-31", "opponent": "Los Gatos United", "score": "2-5", "result": "L" },
+      { "date": "2025-09-27", "opponent": "Bay Area Surf", "score": "5-1", "result": "W" },
+      { "date": "2025-09-28", "opponent": "Allstars United", "score": "2-3", "result": "L" }
+    ],
     "location": {
       "name": "Reed and Grant Sports Park",
       "field": "Field #5",
       "address": "1950 Lafayette St, Santa Clara, CA 95050",
       "googleMapsUrl": "https://www.google.com/maps/dir//1950+Lafayette+St,+Santa+Clara,+CA+95050",
-      "embedUrl": ""
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.234!2d-121.944!3d37.354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb7a1c1c1c1c1%3A0xfedcba0987654321!2s1950%20Lafayette%20St%2C%20Santa%20Clara%2C%20CA%2095050!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
     },
     "homeAway": "away",
     "jersey": "white",
     "socks": "white",
     "result": null,
-    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95050?hour=11",
+    "teamLogos": {
+      "home": "/images/logos/santa-clara-rush.png",
+      "away": "/images/logos/mercury-b16.png"
+    },
+    "weatherUrl": "https://weather.com/weather/hourbyhour/l/95050?day=1&hour=11",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
     "photoAlbumUrl": null
   }

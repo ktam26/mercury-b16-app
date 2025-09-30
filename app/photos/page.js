@@ -27,7 +27,7 @@ export default function Photos() {
                         src={album.coverImage}
                         alt={album.title}
                         fill
-                        className="object-cover"
+                        className="object-cover object-top"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (

@@ -33,10 +33,9 @@ export default function Home() {
           className="flex-shrink-0"
         />
         <div className="flex-1">
-          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-kelly-green to-green-700 bg-clip-text text-transparent mb-1 leading-tight">
+          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-kelly-green to-green-700 bg-clip-text text-transparent leading-tight">
             {teamInfo.shortName}
           </h1>
-          <p className="text-gray-600 text-sm font-medium">{teamInfo.ageGroup}</p>
         </div>
       </div>
 
@@ -56,7 +55,7 @@ export default function Home() {
             <div className="text-sm space-y-2 opacity-95 mb-6">
               <p className="font-medium">{formatGameDate(nextGame.date)} • {nextGame.time}</p>
               <p>📍 {nextGame.location.name}</p>
-              <p>👕 {nextGame.jersey} jersey • {nextGame.socks} socks</p>
+              <p>👕 {nextGame.jersey.charAt(0).toUpperCase() + nextGame.jersey.slice(1)} Jersey • {nextGame.socks.charAt(0).toUpperCase() + nextGame.socks.slice(1)} Socks</p>
             </div>
 
             <Button
@@ -147,7 +146,7 @@ export default function Home() {
 
           <Button
             variant="outline"
-            className="w-full justify-between h-auto py-3 px-4 transition-all hover:border-kelly-green hover:bg-kelly-green/5 active:scale-[0.98]"
+            className="w-full justify-between h-auto py-3 px-4 transition-all hover:border-kelly-green hover:bg-kelly-green/10 hover:text-kelly-green group active:scale-[0.98]"
             asChild
           >
             <a
@@ -159,16 +158,16 @@ export default function Home() {
                 <span>📅</span>
                 <span className="text-left">
                   <span className="block font-semibold">Full Schedule</span>
-                  <span className="block text-xs text-gray-500">GotSport</span>
+                  <span className="block text-xs text-gray-500 group-hover:text-kelly-green/80">GotSport</span>
                 </span>
               </span>
-              <ExternalLink className="w-4 h-4 text-gray-400" />
+              <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-kelly-green" />
             </a>
           </Button>
 
           <Button
             variant="outline"
-            className="w-full justify-between h-auto py-3 px-4 transition-all hover:border-kelly-green hover:bg-kelly-green/5 active:scale-[0.98]"
+            className="w-full justify-between h-auto py-3 px-4 transition-all hover:border-kelly-green hover:bg-kelly-green/10 hover:text-kelly-green group active:scale-[0.98]"
             asChild
           >
             <a
@@ -180,16 +179,16 @@ export default function Home() {
                 <span>📊</span>
                 <span className="text-left">
                   <span className="block font-semibold">League Standings</span>
-                  <span className="block text-xs text-gray-500">Current rankings</span>
+                  <span className="block text-xs text-gray-500 group-hover:text-kelly-green/80">Current rankings</span>
                 </span>
               </span>
-              <ExternalLink className="w-4 h-4 text-gray-400" />
+              <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-kelly-green" />
             </a>
           </Button>
 
           <Button
             variant="outline"
-            className="w-full justify-between h-auto py-3 px-4 transition-all hover:border-kelly-green hover:bg-kelly-green/5 active:scale-[0.98]"
+            className="w-full justify-between h-auto py-3 px-4 transition-all hover:border-kelly-green hover:bg-kelly-green/10 hover:text-kelly-green group active:scale-[0.98]"
             asChild
           >
             <Link href="/photos">
@@ -197,20 +196,15 @@ export default function Home() {
                 <span>📷</span>
                 <span className="text-left">
                   <span className="block font-semibold">Team Photos</span>
-                  <span className="block text-xs text-gray-500">Photo albums</span>
+                  <span className="block text-xs text-gray-500 group-hover:text-kelly-green/80">Photo albums</span>
                 </span>
               </span>
-              <span className="text-gray-400">→</span>
+              <span className="text-gray-400 group-hover:text-kelly-green">→</span>
             </Link>
           </Button>
 
         </CardContent>
       </Card>
-
-      {/* Contact */}
-      <div className="mt-6 text-center text-sm text-gray-600">
-        <p>Questions? Text {teamInfo.managerPhone}</p>
-      </div>
     </div>
   );
 }

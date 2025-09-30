@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { MapPin, Navigation } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatGameDate } from '@/lib/game-utils';
 import { cn } from '@/lib/utils';
+import teamInfo from '@/data/team-info.json';
 
 export function GameCard({ game }) {
   const isPast = game.result !== null;
@@ -34,11 +36,41 @@ export function GameCard({ game }) {
           )}
         </div>
 
-        {/* Opponent */}
+        {/* Team Matchup - Centered Layout */}
         <div className="mb-3">
-          <p className="text-xl font-bold mb-1">vs {game.opponent}</p>
+          {/* Logos and Text Combined */}
+          <div className="flex items-center justify-between px-4 mb-3">
+            {/* Left Logo */}
+            <div className="relative w-12 h-12 flex-shrink-0">
+              <Image
+                src={game.homeAway === 'home' ? game.teamLogos.home : game.teamLogos.away}
+                alt="Almaden Mercury Black B16"
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            {/* Centered Matchup Text */}
+            <div className="flex-1 text-center px-3">
+              <p className="text-sm font-semibold text-gray-700 leading-tight">{teamInfo.name}</p>
+              <p className="text-base font-bold text-gray-400 my-1">vs</p>
+              <p className="text-sm font-semibold text-gray-900 leading-tight">{game.opponent}</p>
+            </div>
+
+            {/* Right Logo */}
+            <div className="relative w-12 h-12 flex-shrink-0">
+              <Image
+                src={game.homeAway === 'home' ? game.teamLogos.away : game.teamLogos.home}
+                alt={game.opponent}
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Score */}
           {isPast && game.result && (
-            <p className="text-lg font-semibold">
+            <p className="text-xl font-bold text-center">
               <span className={cn(
                 isWin && 'text-green-600',
                 isLoss && 'text-red-600',
@@ -60,7 +92,7 @@ export function GameCard({ game }) {
               : 'bg-black'
           )} />
           <span className="text-gray-600">
-            {game.jersey} jersey • {game.socks} socks
+            {game.jersey.charAt(0).toUpperCase() + game.jersey.slice(1)} Jersey • {game.socks.charAt(0).toUpperCase() + game.socks.slice(1)} Socks
           </span>
         </div>
 

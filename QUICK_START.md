@@ -4,21 +4,35 @@
 
 ### Update Schedule After Games
 
-After games are completed:
+After games are completed, update `data/games.json` with **4 things**:
 
-1. Open `data/games.json`
-2. Find the completed game
-3. Update the result:
-   ```json
-   "result": {
-     "us": 3,
-     "them": 1,
-     "goalScorers": ["Player (2)", "Player (1)"]
-   }
-   ```
-4. Save the file - app updates immediately!
+1. **Game Result** - Add score to completed game
+2. **Mercury Record** - Update next game's cumulative W-L-D record
+3. **Mercury Recent Results** - Add completed game to next game's recent form
+4. **Opponent Info** - Update opponent record/form (optional)
 
-**See [MANUAL_UPDATE_GUIDE.md](MANUAL_UPDATE_GUIDE.md) for detailed instructions.**
+**Example workflow:**
+```json
+// Game just played:
+{
+  "id": "game-003",
+  "result": { "us": 2, "them": 1, "goalScorers": [] }  // ← Add this
+}
+
+// Next game:
+{
+  "id": "game-004",
+  "mercuryRecord": "2-0-1",  // ← Update (was 1-0-1, add W)
+  "mercuryRecentResults": [
+    ...,
+    { "date": "2025-10-05", "opponent": "East San Jose", "score": "2-1", "result": "W" }  // ← Add
+  ]
+}
+```
+
+**⏱️ Takes 3-5 minutes per game**
+
+**📖 See [MANUAL_UPDATE_GUIDE.md](MANUAL_UPDATE_GUIDE.md) for detailed step-by-step instructions.**
 
 ## Adding Photo Album Covers
 
