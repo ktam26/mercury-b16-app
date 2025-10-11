@@ -1,0 +1,101 @@
+[
+  {
+    "id": "player-002",
+    "number": 2,
+    "firstName": "Arthur",
+    "lastName": "Yao",
+    "fullName": "Arthur Yao",
+    "birthdate": "2016-04-18",
+    "usClubId": "11594671"
+  },
+  {
+    "id": "player-004",
+    "number": 4,
+    "firstName": "Oliver",
+    "lastName": "Anderson",
+    "fullName": "Oliver Anderson",
+    "birthdate": "2016-03-29",
+    "usClubId": "3811909"
+  },
+  {
+    "id": "player-021",
+    "number": 21,
+    "firstName": "Jackson",
+    "lastName": "Kammah",
+    "fullName": "Jackson Kammah",
+    "birthdate": "2016-02-02",
+    "usClubId": "3812664"
+  },
+  {
+    "id": "player-026",
+    "number": 26,
+    "firstName": "Ivan",
+    "lastName": "Yi",
+    "fullName": "Ivan Yi",
+    "birthdate": "2016-03-03",
+    "usClubId": "9212664"
+  },
+  {
+    "id": "player-029",
+    "number": 29,
+    "firstName": "Neel",
+    "lastName": "Vaddadi",
+    "fullName": "Neel Vaddadi",
+    "birthdate": "2016-01-25",
+    "usClubId": "9268058"
+  },
+  {
+    "id": "player-033",
+    "number": 33,
+    "firstName": "Constantine",
+    "lastName": "Milyakov",
+    "fullName": "Constantine Milyakov",
+    "birthdate": "2016-06-25",
+    "usClubId": "8462831"
+  },
+  {
+    "id": "player-041",
+    "number": 41,
+    "firstName": "Roshan",
+    "lastName": "Parimi",
+    "fullName": "Roshan Parimi",
+    "birthdate": "2016-05-12",
+    "usClubId": "9212507"
+  },
+  {
+    "id": "player-042",
+    "number": 42,
+    "firstName": "Matias",
+    "lastName": "Carrillo",
+    "fullName": "Matias Carrillo",
+    "birthdate": "2016-01-31",
+    "usClubId": "10616121"
+  },
+  {
+    "id": "player-044",
+    "number": 44,
+    "firstName": "Kaden",
+    "lastName": "Tamura",
+    "fullName": "Kaden Tamura",
+    "birthdate": "2016-06-28",
+    "usClubId": "11243598"
+  },
+  {
+    "id": "player-045",
+    "number": 45,
+    "firstName": "Tiago",
+    "lastName": "Pires",
+    "fullName": "Tiago Pires",
+    "birthdate": "2016-05-31",
+    "usClubId": "10616161"
+  },
+  {
+    "id": "player-047",
+    "number": 47,
+    "firstName": "Cameron",
+    "lastName": "Geyer",
+    "fullName": "Cameron Geyer",
+    "birthdate": "2016-02-14",
+    "usClubId": "6282202"
+  }
+]

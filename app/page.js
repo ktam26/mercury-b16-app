@@ -40,7 +40,7 @@ export default function Home() {
           className="flex-shrink-0"
         />
         <div className="flex-1">
-          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-kelly-green to-green-700 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-3xl font-extrabold text-black leading-tight">
             {teamInfo.shortName}
           </h1>
         </div>

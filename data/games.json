@@ -26,7 +26,8 @@
     "result": {
       "us": 3,
       "them": 1,
-      "goalScorers": ["Arthur S (2)", "Ivan (1)"]
+      "goalScorers": ["Arthur Yao (1)", "Jackson Kammah (1)", "Matias Carrillo (1)"],
+      "assists": ["Tiago Pires (1)"]
     },
     "teamLogos": {
       "home": "/images/logos/mercury-b16.png",
@@ -65,7 +66,8 @@
     "result": {
       "us": 3,
       "them": 3,
-      "goalScorers": []
+      "goalScorers": ["Tiago Pires (3)"],
+      "assists": ["Kaden Tamura (1)"]
     },
     "teamLogos": {
       "home": "/images/logos/cupertino-flames.png",
@@ -105,7 +107,8 @@
     "result": {
       "us": 1,
       "them": 5,
-      "goalScorers": []
+      "goalScorers": ["Tiago Pires (1)"],
+      "assists": []
     },
     "teamLogos": {
       "home": "/images/logos/east-san-jose-fc.png",

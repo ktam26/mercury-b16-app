@@ -157,6 +157,14 @@ export default async function GameDetail({ params }) {
                 <p className="font-bold">{game.result.goalScorers.join(', ')}</p>
               </div>
             )}
+
+            {/* Assists for Past Games */}
+            {isPast && game.result?.assists && game.result.assists.length > 0 && (
+              <div className="mt-3 p-4 bg-white/10 backdrop-blur-xs rounded-xl border border-white/20">
+                <p className="text-xs uppercase tracking-wider opacity-75 mb-2">🅰️ Assists</p>
+                <p className="font-bold">{game.result.assists.join(', ')}</p>
+              </div>
+            )}
           </CardContent>
         </Card>
 
