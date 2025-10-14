@@ -18,8 +18,11 @@ import { logResourceError, logToolInvocation } from './logger';
 const SERVER_NAME = 'almaden-mercury-b16';
 const SERVER_VERSION = '1.0.0';
 
-// __dirname in compiled code is already appsdk/dist/, so widgets are in the same directory
-const WIDGET_DIST_DIR = __dirname;
+// In development (tsx): __dirname = appsdk/, widgets are in appsdk/dist/
+// In production (node): __dirname = appsdk/dist/, widgets are in same directory
+const WIDGET_DIST_DIR = __dirname.endsWith('/dist') || __dirname.endsWith('\\dist')
+  ? __dirname
+  : join(__dirname, 'dist');
 
 type WidgetId = 'next-match' | 'schedule' | 'roster' | 'player-stats';
 
