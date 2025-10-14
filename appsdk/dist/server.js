@@ -48,7 +48,8 @@ const statsSerializer = __importStar(require("./serializers/stats-serializer"));
 const logger_1 = require("./logger");
 const SERVER_NAME = 'almaden-mercury-b16';
 const SERVER_VERSION = '1.0.0';
-const WIDGET_DIST_DIR = (0, node_path_1.join)(__dirname, 'dist');
+// __dirname in compiled code is already appsdk/dist/, so widgets are in the same directory
+const WIDGET_DIST_DIR = __dirname;
 const WIDGETS = {
     'next-match': {
         uri: 'ui://widget/next-match',
