@@ -203,15 +203,20 @@ export function createMcpServer() {
       title: 'List schedule',
       description: 'Get the team schedule with past results and upcoming games.',
       inputSchema: {
-        includePast: z.boolean().describe('Include past games in the response (default: true)').optional(),
-        limit: z
-          .number()
-          .int()
-          .positive()
-          .max(20)
-          .describe('Maximum number of upcoming games to return (default: 10)')
-          .optional(),
-      },
+        type: 'object',
+        properties: {
+          includePast: {
+            type: 'boolean',
+            description: 'Include past games in the response (default: true)'
+          },
+          limit: {
+            type: 'number',
+            description: 'Maximum number of upcoming games to return (default: 10)',
+            minimum: 1,
+            maximum: 20
+          }
+        }
+      } as any,
       _meta: {
         'openai/outputTemplate': WIDGETS['schedule'].uri,
       },
@@ -253,11 +258,14 @@ export function createMcpServer() {
       title: 'Get player stats',
       description: 'Return season statistics for a specific player or an overall team summary.',
       inputSchema: {
-        playerId: z
-          .string()
-          .describe('Player ID (e.g., "player-045"). If omitted, returns team stats overview.')
-          .optional(),
-      },
+        type: 'object',
+        properties: {
+          playerId: {
+            type: 'string',
+            description: 'Player ID (e.g., "player-045"). If omitted, returns team stats overview.'
+          }
+        }
+      } as any,
       _meta: {
         'openai/outputTemplate': WIDGETS['player-stats'].uri,
       },

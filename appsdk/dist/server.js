@@ -41,7 +41,6 @@ exports.createMcpServer = createMcpServer;
 const node_fs_1 = require("node:fs");
 const node_path_1 = require("node:path");
 const mcp_js_1 = require("@modelcontextprotocol/sdk/server/mcp.js");
-const zod_1 = require("zod");
 const gameSerializer = __importStar(require("./serializers/game-serializer"));
 const rosterSerializer = __importStar(require("./serializers/roster-serializer"));
 const statsSerializer = __importStar(require("./serializers/stats-serializer"));
@@ -193,14 +192,19 @@ function createMcpServer() {
         title: 'List schedule',
         description: 'Get the team schedule with past results and upcoming games.',
         inputSchema: {
-            includePast: zod_1.z.boolean().describe('Include past games in the response (default: true)').optional(),
-            limit: zod_1.z
-                .number()
-                .int()
-                .positive()
-                .max(20)
-                .describe('Maximum number of upcoming games to return (default: 10)')
-                .optional(),
+            type: 'object',
+            properties: {
+                includePast: {
+                    type: 'boolean',
+                    description: 'Include past games in the response (default: true)'
+                },
+                limit: {
+                    type: 'number',
+                    description: 'Maximum number of upcoming games to return (default: 10)',
+                    minimum: 1,
+                    maximum: 20
+                }
+            }
         },
         _meta: {
             'openai/outputTemplate': WIDGETS['schedule'].uri,
@@ -229,10 +233,13 @@ function createMcpServer() {
         title: 'Get player stats',
         description: 'Return season statistics for a specific player or an overall team summary.',
         inputSchema: {
-            playerId: zod_1.z
-                .string()
-                .describe('Player ID (e.g., "player-045"). If omitted, returns team stats overview.')
-                .optional(),
+            type: 'object',
+            properties: {
+                playerId: {
+                    type: 'string',
+                    description: 'Player ID (e.g., "player-045"). If omitted, returns team stats overview.'
+                }
+            }
         },
         _meta: {
             'openai/outputTemplate': WIDGETS['player-stats'].uri,
