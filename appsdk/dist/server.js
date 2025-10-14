@@ -194,21 +194,6 @@ function createMcpServer() {
     server.registerTool('list_schedule', {
         title: 'List schedule',
         description: 'Get the team schedule with past results and upcoming games.',
-        inputSchema: {
-            type: 'object',
-            properties: {
-                includePast: {
-                    type: 'boolean',
-                    description: 'Include past games in the response (default: true)'
-                },
-                limit: {
-                    type: 'number',
-                    description: 'Maximum number of upcoming games to return (default: 10)',
-                    minimum: 1,
-                    maximum: 20
-                }
-            }
-        },
         _meta: {
             'openai/outputTemplate': WIDGETS['schedule'].uri,
         },
@@ -235,15 +220,6 @@ function createMcpServer() {
     server.registerTool('get_player_stats', {
         title: 'Get player stats',
         description: 'Return season statistics for a specific player or an overall team summary.',
-        inputSchema: {
-            type: 'object',
-            properties: {
-                playerId: {
-                    type: 'string',
-                    description: 'Player ID (e.g., "player-045"). If omitted, returns team stats overview.'
-                }
-            }
-        },
         _meta: {
             'openai/outputTemplate': WIDGETS['player-stats'].uri,
         },
