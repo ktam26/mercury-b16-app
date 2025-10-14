@@ -52,6 +52,7 @@ interface ExistingGame {
   date: string;
   time: string;
   opponent: string;
+  matchNumber?: string;
   result?: {
     us: number;
     them: number;
@@ -227,6 +228,7 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
 
   scrapedMatches.forEach(match => {
     const isHome = match.homeTeam.includes('Almaden');
+    const matchNumber = match.matchNumber?.trim();
 
     // Try to find matching game in existing games
     const normalizedScrapedOpponent = normalizeOpponentName(
@@ -247,31 +249,63 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
       }
     }
 
+    // Prefer matching by recorded match number
+    let gameIndex = -1;
+    if (matchNumber) {
+      gameIndex = updatedGames.findIndex(game => game.matchNumber === matchNumber);
+    }
+
     // Find matching game by opponent name AND date proximity
     // This prevents matching completed games when there's a rematch
-    const gameIndex = updatedGames.findIndex(game => {
-      const normalizedExistingOpponent = normalizeOpponentName(game.opponent);
-      const opponentMatches = normalizedExistingOpponent.includes(normalizedScrapedOpponent) ||
-                              normalizedScrapedOpponent.includes(normalizedExistingOpponent);
+    if (gameIndex === -1) {
+      gameIndex = updatedGames.findIndex(game => {
+        const normalizedExistingOpponent = normalizeOpponentName(game.opponent);
+        const opponentMatches = normalizedExistingOpponent.includes(normalizedScrapedOpponent) ||
+                                normalizedScrapedOpponent.includes(normalizedExistingOpponent);
 
-      if (!opponentMatches) return false;
+        if (!opponentMatches) return false;
 
-      // If the game already has a result, only match if dates are close (within 7 days)
-      // This prevents updating a completed game when there's a future rematch
-      if (game.result && scrapedDate) {
-        const existingDate = new Date(game.date);
-        const scrapedDateObj = new Date(scrapedDate);
-        const daysDiff = Math.abs((existingDate.getTime() - scrapedDateObj.getTime()) / (1000 * 60 * 60 * 24));
-        return daysDiff <= 7; // Only match if within 7 days
-      }
+        if (game.matchNumber && matchNumber) {
+          return game.matchNumber === matchNumber;
+        }
 
-      // If no result yet, match by opponent name (it's likely the upcoming game)
-      return true;
-    });
+        if (scrapedDate && game.date === scrapedDate) {
+          return true;
+        }
+
+        // If the game already has a result, only match if dates are close (within 7 days)
+        if (game.result && scrapedDate) {
+          const existingDate = new Date(game.date);
+          const scrapedDateObj = new Date(scrapedDate);
+          const daysDiff = Math.abs((existingDate.getTime() - scrapedDateObj.getTime()) / (1000 * 60 * 60 * 24));
+          return daysDiff <= 7; // Only match if within 7 days
+        }
+
+        // If no result yet, match by opponent name (it's likely the upcoming game)
+        return !game.result;
+      });
+    }
 
     if (gameIndex !== -1) {
       const game = updatedGames[gameIndex];
+      let updatedGame: ExistingGame = { ...game };
       let hasChanges = false;
+
+      // Store match number for future runs
+      if (matchNumber && updatedGame.matchNumber !== matchNumber) {
+        updatedGame.matchNumber = matchNumber;
+        hasChanges = true;
+      }
+
+      const hasRecordedResult =
+        typeof updatedGame.result?.us === 'number' && typeof updatedGame.result?.them === 'number';
+
+      if (hasRecordedResult) {
+        if (hasChanges) {
+          updatedGames[gameIndex] = updatedGame;
+        }
+        return;
+      }
 
       // Convert scraped time format "2:15 PM PDT" to "2:15 PM"
       const scrapedTime = match.time ? match.time.replace(/\s+(PDT|PST)$/, '') : '';
@@ -281,8 +315,8 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
         updates.push(
           `⚽ ${game.opponent} rescheduled: ${game.date} → ${scrapedDate}`
         );
-        updatedGames[gameIndex] = {
-          ...updatedGames[gameIndex],
+        updatedGame = {
+          ...updatedGame,
           date: scrapedDate,
         };
         hasChanges = true;
@@ -292,8 +326,8 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
         updates.push(
           `⚽ ${game.opponent} time changed: ${game.time} → ${scrapedTime}`
         );
-        updatedGames[gameIndex] = {
-          ...updatedGames[gameIndex],
+        updatedGame = {
+          ...updatedGame,
           time: scrapedTime,
         };
         hasChanges = true;
@@ -311,8 +345,8 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
             const oldResult = game.result ? `${game.result.us}-${game.result.them}` : 'no result';
 
             // Preserve goal scorers and assists if they exist
-            updatedGames[gameIndex] = {
-              ...updatedGames[gameIndex],
+            updatedGame = {
+              ...updatedGame,
               result: {
                 us: mercuryScore,
                 them: opponentScore,
@@ -327,6 +361,10 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
             hasChanges = true;
           }
         }
+      }
+
+      if (hasChanges) {
+        updatedGames[gameIndex] = updatedGame;
       }
     }
   });
