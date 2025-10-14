@@ -233,30 +233,45 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
       isHome ? match.awayTeam : match.homeTeam
     );
 
+    // Convert scraped date for matching
+    let scrapedDate = '';
+    if (match.date) {
+      const dateMatch = match.date.match(/(\w+)\s+(\d+),\s+(\d+)/);
+      if (dateMatch) {
+        const monthMap: Record<string, string> = {
+          Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+          Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+        };
+        const [, month, day, year] = dateMatch;
+        scrapedDate = `${year}-${monthMap[month]}-${day.padStart(2, '0')}`;
+      }
+    }
+
+    // Find matching game by opponent name AND date proximity
+    // This prevents matching completed games when there's a rematch
     const gameIndex = updatedGames.findIndex(game => {
       const normalizedExistingOpponent = normalizeOpponentName(game.opponent);
+      const opponentMatches = normalizedExistingOpponent.includes(normalizedScrapedOpponent) ||
+                              normalizedScrapedOpponent.includes(normalizedExistingOpponent);
 
-      return normalizedExistingOpponent.includes(normalizedScrapedOpponent) ||
-             normalizedScrapedOpponent.includes(normalizedExistingOpponent);
+      if (!opponentMatches) return false;
+
+      // If the game already has a result, only match if dates are close (within 7 days)
+      // This prevents updating a completed game when there's a future rematch
+      if (game.result && scrapedDate) {
+        const existingDate = new Date(game.date);
+        const scrapedDateObj = new Date(scrapedDate);
+        const daysDiff = Math.abs((existingDate.getTime() - scrapedDateObj.getTime()) / (1000 * 60 * 60 * 24));
+        return daysDiff <= 7; // Only match if within 7 days
+      }
+
+      // If no result yet, match by opponent name (it's likely the upcoming game)
+      return true;
     });
 
     if (gameIndex !== -1) {
       const game = updatedGames[gameIndex];
       let hasChanges = false;
-
-      // Convert scraped date format "Sep 07, 2025" to "2025-09-07"
-      let scrapedDate = '';
-      if (match.date) {
-        const dateMatch = match.date.match(/(\w+)\s+(\d+),\s+(\d+)/);
-        if (dateMatch) {
-          const monthMap: Record<string, string> = {
-            Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
-            Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
-          };
-          const [, month, day, year] = dateMatch;
-          scrapedDate = `${year}-${monthMap[month]}-${day.padStart(2, '0')}`;
-        }
-      }
 
       // Convert scraped time format "2:15 PM PDT" to "2:15 PM"
       const scrapedTime = match.time ? match.time.replace(/\s+(PDT|PST)$/, '') : '';
