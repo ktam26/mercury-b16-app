@@ -226,16 +226,7 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
   const updatedGames = [...existingGames];
 
   scrapedMatches.forEach(match => {
-    // Skip matches without scores
-    if (match.score === '-' || !match.score) return;
-
-    // Parse score
-    const scoreMatch = match.score.match(/(\d+)\s*-\s*(\d+)/);
-    if (!scoreMatch) return;
-
     const isHome = match.homeTeam.includes('Almaden');
-    const mercuryScore = isHome ? parseInt(scoreMatch[1]) : parseInt(scoreMatch[2]);
-    const opponentScore = isHome ? parseInt(scoreMatch[2]) : parseInt(scoreMatch[1]);
 
     // Try to find matching game in existing games
     const normalizedScrapedOpponent = normalizeOpponentName(
@@ -244,7 +235,6 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
 
     const gameIndex = updatedGames.findIndex(game => {
       const normalizedExistingOpponent = normalizeOpponentName(game.opponent);
-      const dateMatch = game.date === match.date.replace(/,/g, '').split(' ').slice(0, 3).join('-');
 
       return normalizedExistingOpponent.includes(normalizedScrapedOpponent) ||
              normalizedScrapedOpponent.includes(normalizedExistingOpponent);
@@ -252,25 +242,76 @@ function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Ma
 
     if (gameIndex !== -1) {
       const game = updatedGames[gameIndex];
+      let hasChanges = false;
 
-      // Only update if result doesn't exist or has changed
-      if (!game.result || game.result.us !== mercuryScore || game.result.them !== opponentScore) {
-        const oldResult = game.result ? `${game.result.us}-${game.result.them}` : 'no result';
+      // Convert scraped date format "Sep 07, 2025" to "2025-09-07"
+      let scrapedDate = '';
+      if (match.date) {
+        const dateMatch = match.date.match(/(\w+)\s+(\d+),\s+(\d+)/);
+        if (dateMatch) {
+          const monthMap: Record<string, string> = {
+            Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+            Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+          };
+          const [, month, day, year] = dateMatch;
+          scrapedDate = `${year}-${monthMap[month]}-${day.padStart(2, '0')}`;
+        }
+      }
 
-        // Preserve goal scorers and assists if they exist
-        updatedGames[gameIndex] = {
-          ...game,
-          result: {
-            us: mercuryScore,
-            them: opponentScore,
-            goalScorers: game.result?.goalScorers || [],
-            assists: game.result?.assists || [],
-          },
-        };
+      // Convert scraped time format "2:15 PM PDT" to "2:15 PM"
+      const scrapedTime = match.time ? match.time.replace(/\s+(PDT|PST)$/, '') : '';
 
+      // Check for date/time changes
+      if (scrapedDate && scrapedDate !== game.date) {
         updates.push(
-          `Updated ${game.opponent}: ${oldResult} → ${mercuryScore}-${opponentScore}`
+          `⚽ ${game.opponent} rescheduled: ${game.date} → ${scrapedDate}`
         );
+        updatedGames[gameIndex] = {
+          ...updatedGames[gameIndex],
+          date: scrapedDate,
+        };
+        hasChanges = true;
+      }
+
+      if (scrapedTime && scrapedTime !== game.time) {
+        updates.push(
+          `⚽ ${game.opponent} time changed: ${game.time} → ${scrapedTime}`
+        );
+        updatedGames[gameIndex] = {
+          ...updatedGames[gameIndex],
+          time: scrapedTime,
+        };
+        hasChanges = true;
+      }
+
+      // Update score if available
+      if (match.score !== '-' && match.score) {
+        const scoreMatch = match.score.match(/(\d+)\s*-\s*(\d+)/);
+        if (scoreMatch) {
+          const mercuryScore = isHome ? parseInt(scoreMatch[1]) : parseInt(scoreMatch[2]);
+          const opponentScore = isHome ? parseInt(scoreMatch[2]) : parseInt(scoreMatch[1]);
+
+          // Only update if result doesn't exist or has changed
+          if (!game.result || game.result.us !== mercuryScore || game.result.them !== opponentScore) {
+            const oldResult = game.result ? `${game.result.us}-${game.result.them}` : 'no result';
+
+            // Preserve goal scorers and assists if they exist
+            updatedGames[gameIndex] = {
+              ...updatedGames[gameIndex],
+              result: {
+                us: mercuryScore,
+                them: opponentScore,
+                goalScorers: game.result?.goalScorers || [],
+                assists: game.result?.assists || [],
+              },
+            };
+
+            updates.push(
+              `⚽ Score updated for ${game.opponent}: ${oldResult} → ${mercuryScore}-${opponentScore}`
+            );
+            hasChanges = true;
+          }
+        }
       }
     }
   });
