@@ -1,0 +1,189 @@
+{
+  "timestamp": "2025-10-14T07:37:24.018Z",
+  "standings": [
+    {
+      "position": 1,
+      "team": "Los Gatos United Soccer Club 2016B Academy Black",
+      "matchesPlayed": 6,
+      "wins": 6,
+      "losses": 0,
+      "draws": 0,
+      "goalsFor": 28,
+      "goalsAgainst": 13,
+      "goalDifference": 17,
+      "points": 18
+    },
+    {
+      "position": 2,
+      "team": "East San Jose FC ESJFC 16B Latinos White",
+      "matchesPlayed": 5,
+      "wins": 3,
+      "losses": 2,
+      "draws": 0,
+      "goalsFor": 18,
+      "goalsAgainst": 14,
+      "goalDifference": 4,
+      "points": 9
+    },
+    {
+      "position": 3,
+      "team": "Cupertino FC Cupertino FC Flames 16B",
+      "matchesPlayed": 5,
+      "wins": 2,
+      "losses": 2,
+      "draws": 1,
+      "goalsFor": 19,
+      "goalsAgainst": 16,
+      "goalDifference": 1,
+      "points": 7
+    },
+    {
+      "position": 4,
+      "team": "Bay Area Surf 16B Academy I",
+      "matchesPlayed": 5,
+      "wins": 2,
+      "losses": 3,
+      "draws": 0,
+      "goalsFor": 14,
+      "goalsAgainst": 20,
+      "goalDifference": -5,
+      "points": 6
+    },
+    {
+      "position": 5,
+      "team": "Almaden FC Almaden FC Mercury B16 Black",
+      "matchesPlayed": 4,
+      "wins": 1,
+      "losses": 2,
+      "draws": 1,
+      "goalsFor": 9,
+      "goalsAgainst": 12,
+      "goalDifference": -3,
+      "points": 4
+    },
+    {
+      "position": 6,
+      "team": "West Valley Soccer Club West Valley United 016B Red",
+      "matchesPlayed": 3,
+      "wins": 1,
+      "losses": 2,
+      "draws": 0,
+      "goalsFor": 10,
+      "goalsAgainst": 11,
+      "goalDifference": -2,
+      "points": 3
+    },
+    {
+      "position": 7,
+      "team": "Allstars United 16B Pre-Academy",
+      "matchesPlayed": 4,
+      "wins": 1,
+      "losses": 3,
+      "draws": 0,
+      "goalsFor": 5,
+      "goalsAgainst": 15,
+      "goalDifference": -10,
+      "points": 3
+    },
+    {
+      "position": 8,
+      "team": "Santa Clara Rush 2016B Cougars - Blue",
+      "matchesPlayed": 4,
+      "wins": 1,
+      "losses": 3,
+      "draws": 0,
+      "goalsFor": 10,
+      "goalsAgainst": 12,
+      "goalDifference": -2,
+      "points": 3
+    }
+  ],
+  "schedule": [
+    {
+      "matchNumber": "17584",
+      "date": "Sep 07, 2025",
+      "time": "2:15 PM PDT",
+      "homeTeam": "Almaden FC Almaden FC Mercury B16 Black",
+      "awayTeam": "Santa Clara Rush 2016B Cougars - Blue",
+      "score": "3 - 1",
+      "location": "Pioneer High School (PINR) - Pioneer High School 1C",
+      "division": "Silver - Region 2 North",
+      "status": "Scheduled"
+    },
+    {
+      "matchNumber": "17595",
+      "date": "Sep 20, 2025",
+      "time": "10:30 AM PDT",
+      "homeTeam": "Cupertino FC Cupertino FC Flames 16B",
+      "awayTeam": "Almaden FC Almaden FC Mercury B16 Black",
+      "score": "3 - 3",
+      "location": "Creekside Park - Creekside 2 7v7",
+      "division": "Silver - Region 2 North"
+    },
+    {
+      "matchNumber": "17602",
+      "date": "Oct 05, 2025",
+      "time": "10:30 AM PDT",
+      "homeTeam": "East San Jose FC ESJFC 16B Latinos White",
+      "awayTeam": "Almaden FC Almaden FC Mercury B16 Black",
+      "score": "5 - 1",
+      "location": "Washington Elementary School - Full",
+      "division": "Silver - Region 2 North",
+      "status": "Scheduled"
+    },
+    {
+      "matchNumber": "17605",
+      "date": "Oct 12, 2025",
+      "time": "3:30 PM PDT",
+      "homeTeam": "Almaden FC Almaden FC Mercury B16 Black",
+      "awayTeam": "Los Gatos United Soccer Club 2016B Academy Black",
+      "score": "2 - 3",
+      "location": "Pioneer High School (PINR) - Pioneer High School 1C",
+      "division": "Silver - Region 2 North",
+      "status": "Scheduled"
+    },
+    {
+      "matchNumber": "17589",
+      "date": "Nov 08, 2025",
+      "time": "11:00 AM PST",
+      "homeTeam": "West Valley Soccer Club West Valley United 016B Red",
+      "awayTeam": "Almaden FC Almaden FC Mercury B16 Black",
+      "score": "-",
+      "location": "Latimer School - 9v9 Turf Field",
+      "division": "Silver - Region 2 North"
+    },
+    {
+      "matchNumber": "17612",
+      "date": "Nov 09, 2025",
+      "time": "11:30 AM PST",
+      "homeTeam": "Santa Clara Rush 2016B Cougars - Blue",
+      "awayTeam": "Almaden FC Almaden FC Mercury B16 Black",
+      "score": "-",
+      "location": "Reed and Grant Sports Park - Field #5",
+      "division": "Silver - Region 2 North",
+      "status": "Scheduled"
+    },
+    {
+      "matchNumber": "17592",
+      "date": "Nov 16, 2025",
+      "time": "9:15 AM PST",
+      "homeTeam": "Almaden FC Almaden FC Mercury B16 Black",
+      "awayTeam": "Allstars United 16B Pre-Academy",
+      "score": "-",
+      "location": "Pioneer High School (PINR) - Pioneer High School 1C",
+      "division": "Silver - Region 2 North",
+      "status": "Scheduled"
+    },
+    {
+      "matchNumber": "17610",
+      "date": "Nov 23, 2025",
+      "time": "2:00 PM PST",
+      "homeTeam": "Bay Area Surf 16B Academy I",
+      "awayTeam": "Almaden FC Almaden FC Mercury B16 Black",
+      "score": "-",
+      "location": "Church on the Hill - 7v7",
+      "division": "Silver - Region 2 North",
+      "status": "Rescheduled"
+    }
+  ]
+}

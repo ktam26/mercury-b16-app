@@ -11,7 +11,8 @@
     "appsdk:build:server": "tsc -p appsdk/tsconfig.json",
     "appsdk:build:widgets": "node appsdk/build-widgets.js",
     "appsdk:dev": "tsx appsdk/server-entry.ts",
-    "appsdk:start": "node appsdk/dist/server-entry.js"
+    "appsdk:start": "node appsdk/dist/server-entry.js",
+    "scrape": "tsx scripts/scrape-gotsport.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
@@ -34,8 +35,11 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/cheerio": "^0.22.35",
     "@types/node": "^22.10.5",
     "autoprefixer": "^10",
+    "axios": "^1.12.2",
+    "cheerio": "^1.1.2",
     "esbuild": "^0.24.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",

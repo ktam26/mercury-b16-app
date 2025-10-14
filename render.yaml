@@ -13,3 +13,15 @@ services:
       - key: MCP_PATH
         value: /mcp
     # Render automatically provides PORT environment variable
+
+  - type: cron
+    name: gotsport-scraper
+    env: node
+    region: oregon
+    plan: free
+    schedule: "0 7 * * 2"  # Every Tuesday at 7 AM UTC (12 AM Pacific)
+    buildCommand: npm ci
+    startCommand: npm run scrape
+    envVars:
+      - key: NODE_ENV
+        value: production
