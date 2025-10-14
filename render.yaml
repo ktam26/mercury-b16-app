@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: mercury-b16-mcp
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm ci && npm run appsdk:build
+    startCommand: node appsdk/dist/server-entry.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MCP_PATH
+        value: /mcp
+    # Render automatically provides PORT environment variable
