@@ -56,7 +56,8 @@
     },
     "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?day=1&hour=14",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
-    "photoAlbumUrl": null
+    "photoAlbumUrl": null,
+    "matchNumber": "17584"
   },
   {
     "id": "game-002",
@@ -64,7 +65,7 @@
     "time": "10:30 AM",
     "opponent": "Cupertino FC Flames 16B",
     "mercuryRecord": "1-0-0",
-    "opponentRecord": "1-2-1",
+    "opponentRecord": "3-2-1",
     "opponentGoals": "",
     "mercuryRecentResults": [
       {
@@ -120,7 +121,8 @@
     },
     "weatherUrl": "https://weather.com/weather/hourbyhour/l/95014?day=1&hour=10",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
-    "photoAlbumUrl": "https://shotsbyryanq.pixieset.com/almadenfcmercury16blackvscupertinofcflames16b/"
+    "photoAlbumUrl": "https://shotsbyryanq.pixieset.com/almadenfcmercury16blackvscupertinofcflames16b/",
+    "matchNumber": "17595"
   },
   {
     "id": "game-003",
@@ -128,7 +130,7 @@
     "time": "10:30 AM",
     "opponent": "East San Jose FC ESJFC 16B Latinos White",
     "mercuryRecord": "1-0-1",
-    "opponentRecord": "2-1-0",
+    "opponentRecord": "3-2-0",
     "opponentGoals": "",
     "mercuryRecentResults": [
       {
@@ -188,7 +190,8 @@
     },
     "weatherUrl": "https://weather.com/weather/hourbyhour/l/95046?day=1&hour=10",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
-    "photoAlbumUrl": null
+    "photoAlbumUrl": null,
+    "matchNumber": "17602"
   },
   {
     "id": "game-004",
@@ -265,7 +268,7 @@
     "time": "2:00 PM",
     "opponent": "Bay Area Surf 16B Academy I",
     "mercuryRecord": "1-2-1",
-    "opponentRecord": "1-1-0",
+    "opponentRecord": "2-3-0",
     "opponentGoals": "",
     "mercuryRecentResults": [
       {
@@ -318,7 +321,8 @@
     },
     "weatherUrl": "https://weather.com/weather/hourbyhour/l/95032?day=1&hour=15",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
-    "photoAlbumUrl": null
+    "photoAlbumUrl": null,
+    "matchNumber": "17610"
   },
   {
     "id": "game-006",
@@ -326,7 +330,7 @@
     "time": "9:15 AM",
     "opponent": "Allstars United 16B Pre-Academy",
     "mercuryRecord": "1-2-1",
-    "opponentRecord": "1-2-0",
+    "opponentRecord": "1-3-0",
     "opponentGoals": "",
     "mercuryRecentResults": [
       {
@@ -385,7 +389,8 @@
     },
     "weatherUrl": "https://weather.com/weather/hourbyhour/l/95123?day=1&hour=11",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
-    "photoAlbumUrl": null
+    "photoAlbumUrl": null,
+    "matchNumber": "17592"
   },
   {
     "id": "game-007",
@@ -393,7 +398,7 @@
     "time": "11:00 AM",
     "opponent": "West Valley United 016B Red",
     "mercuryRecord": "1-2-1",
-    "opponentRecord": "0-1-0",
+    "opponentRecord": "1-3-0",
     "opponentGoals": "",
     "mercuryRecentResults": [
       {
@@ -446,7 +451,8 @@
     },
     "weatherUrl": "https://weather.com/weather/hourbyhour/l/95070?day=1&hour=11",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
-    "photoAlbumUrl": null
+    "photoAlbumUrl": null,
+    "matchNumber": "17589"
   },
   {
     "id": "game-008",
@@ -484,22 +490,10 @@
     ],
     "opponentRecentResults": [
       {
-        "date": "2025-08-31",
-        "opponent": "Los Gatos United",
-        "score": "2-5",
-        "result": "L"
-      },
-      {
-        "date": "2025-09-27",
-        "opponent": "Bay Area Surf",
-        "score": "5-1",
-        "result": "W"
-      },
-      {
-        "date": "2025-09-28",
-        "opponent": "Allstars United",
-        "score": "2-3",
-        "result": "L"
+        "date": "2025-09-07",
+        "opponent": "Almaden FC Mercury B16 Black",
+        "result": "L",
+        "score": "1-3"
       }
     ],
     "location": {
@@ -519,6 +513,7 @@
     },
     "weatherUrl": "https://weather.com/weather/hourbyhour/l/95050?day=1&hour=11",
     "gotsportUrl": "https://system.gotsport.com/org_event/events/44142/schedules?team=3231307",
-    "photoAlbumUrl": null
+    "photoAlbumUrl": null,
+    "matchNumber": "17612"
   }
 ]

@@ -1,9 +1,8 @@
 #!/usr/bin/env tsx
 /**
- * GotSport Data Scraper - Enhanced Version
+ * GotSport Data Scraper
  * Fetches league results and team schedule from GotSport
  * Detects changes and updates local data files
- * AUTO-POPULATES opponent records from standings data
  */
 
 import axios from 'axios';
@@ -48,21 +47,12 @@ interface ScrapedData {
   schedule: Match[];
 }
 
-interface OpponentRecentResult {
-  date: string;
-  opponent: string;
-  result: 'W' | 'L' | 'D';
-  score: string;
-}
-
 interface ExistingGame {
   id: string;
   date: string;
   time: string;
   opponent: string;
   matchNumber?: string;
-  opponentRecord?: string;
-  opponentRecentResults?: OpponentRecentResult[];
   result?: {
     us: number;
     them: number;
@@ -229,158 +219,7 @@ function normalizeOpponentName(name: string): string {
     .trim();
 }
 
-/**
- * Find opponent team in standings by matching team name
- */
-function findOpponentInStandings(opponentName: string, standings: StandingsEntry[]): StandingsEntry | null {
-  const normalizedOpponent = normalizeOpponentName(opponentName);
-  
-  // Try exact match first (case insensitive)
-  let match = standings.find(team => {
-    const normalizedTeam = normalizeOpponentName(team.team);
-    return normalizedTeam === normalizedOpponent;
-  });
-
-  // If no exact match, try partial match
-  if (!match) {
-    match = standings.find(team => {
-      const normalizedTeam = normalizeOpponentName(team.team);
-      return normalizedTeam.includes(normalizedOpponent) || normalizedOpponent.includes(normalizedTeam);
-    });
-  }
-
-  return match || null;
-}
-
-/**
- * Get opponent's record from standings data
- */
-function getOpponentRecord(opponentName: string, standings: StandingsEntry[]): string | null {
-  const opponent = findOpponentInStandings(opponentName, standings);
-  
-  if (!opponent) {
-    console.log(`⚠️  Could not find opponent in standings: ${opponentName}`);
-    return null;
-  }
-
-  // Return W-L-D format
-  return `${opponent.wins}-${opponent.losses}-${opponent.draws}`;
-}
-
-/**
- * Find opponent's recent matches from the full schedule
- * Note: Currently limited to matches against Mercury since we only have Mercury's schedule
- * This function is prepared for when full league schedule becomes available
- */
-function getOpponentRecentResults(
-  opponentName: string,
-  gameDate: string,
-  allMatches: Match[],
-  maxResults: number = 3
-): OpponentRecentResult[] {
-  const results: OpponentRecentResult[] = [];
-  const normalizedOpponent = normalizeOpponentName(opponentName);
-  
-  // Convert game date to Date object for comparison
-  const gameDateObj = new Date(gameDate);
-  
-  // Find all matches involving the opponent BEFORE the Mercury game
-  const opponentMatches = allMatches
-    .filter(match => {
-      // Check if opponent is involved in this match
-      const isHome = normalizeOpponentName(match.homeTeam).includes(normalizedOpponent) ||
-                     normalizedOpponent.includes(normalizeOpponentName(match.homeTeam));
-      const isAway = normalizeOpponentName(match.awayTeam).includes(normalizedOpponent) ||
-                     normalizedOpponent.includes(normalizeOpponentName(match.awayTeam));
-      
-      if (!isHome && !isAway) return false;
-
-      // Only include matches with scores
-      if (!match.score || match.score === '-') return false;
-
-      // Convert match date to Date object
-      const matchDate = convertGotSportDateToISO(match.date);
-      if (!matchDate) return false;
-      
-      const matchDateObj = new Date(matchDate);
-      
-      // Only include matches BEFORE the Mercury game
-      return matchDateObj < gameDateObj;
-    })
-    .sort((a, b) => {
-      // Sort by date descending (most recent first)
-      const dateA = new Date(convertGotSportDateToISO(a.date) || '');
-      const dateB = new Date(convertGotSportDateToISO(b.date) || '');
-      return dateB.getTime() - dateA.getTime();
-    })
-    .slice(0, maxResults);
-
-  // Convert to OpponentRecentResult format
-  opponentMatches.forEach(match => {
-    const isHome = normalizeOpponentName(match.homeTeam).includes(normalizedOpponent) ||
-                   normalizedOpponent.includes(normalizeOpponentName(match.homeTeam));
-    
-    const scoreMatch = match.score.match(/(\d+)\s*-\s*(\d+)/);
-    if (!scoreMatch) return;
-
-    const homeScore = parseInt(scoreMatch[1]);
-    const awayScore = parseInt(scoreMatch[2]);
-    
-    const opponentScore = isHome ? homeScore : awayScore;
-    const otherScore = isHome ? awayScore : homeScore;
-    
-    let result: 'W' | 'L' | 'D';
-    if (opponentScore > otherScore) result = 'W';
-    else if (opponentScore < otherScore) result = 'L';
-    else result = 'D';
-
-    const otherTeam = isHome ? match.awayTeam : match.homeTeam;
-    
-    results.push({
-      date: convertGotSportDateToISO(match.date) || match.date,
-      opponent: simplifyTeamName(otherTeam),
-      result,
-      score: `${opponentScore}-${otherScore}`
-    });
-  });
-
-  return results;
-}
-
-/**
- * Simplify team name for display (remove common prefixes/suffixes)
- */
-function simplifyTeamName(fullName: string): string {
-  return fullName
-    .replace(/^.*?\s+FC\s+/i, '')
-    .replace(/^.*?\s+Soccer Club\s+/i, '')
-    .replace(/\s+16B.*$/i, '')
-    .replace(/\s+-\s+.*$/i, '')
-    .trim();
-}
-
-/**
- * Convert GotSport date format to ISO date
- */
-function convertGotSportDateToISO(gotSportDate: string): string | null {
-  // Format: "Sep 07, 2025" -> "2025-09-07"
-  const dateMatch = gotSportDate.match(/(\w+)\s+(\d+),\s+(\d+)/);
-  if (!dateMatch) return null;
-
-  const monthMap: Record<string, string> = {
-    Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
-    Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
-  };
-  
-  const [, month, day, year] = dateMatch;
-  return `${year}-${monthMap[month]}-${day.padStart(2, '0')}`;
-}
-
-function updateGamesWithScores(
-  existingGames: ExistingGame[],
-  scrapedMatches: Match[],
-  standings: StandingsEntry[]
-): {
+function updateGamesWithScores(existingGames: ExistingGame[], scrapedMatches: Match[]): {
   games: ExistingGame[];
   updates: string[];
 } {
@@ -399,7 +238,15 @@ function updateGamesWithScores(
     // Convert scraped date for matching
     let scrapedDate = '';
     if (match.date) {
-      scrapedDate = convertGotSportDateToISO(match.date) || '';
+      const dateMatch = match.date.match(/(\w+)\s+(\d+),\s+(\d+)/);
+      if (dateMatch) {
+        const monthMap: Record<string, string> = {
+          Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+          Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
+        };
+        const [, month, day, year] = dateMatch;
+        scrapedDate = `${year}-${monthMap[month]}-${day.padStart(2, '0')}`;
+      }
     }
 
     // Prefer matching by recorded match number
@@ -448,41 +295,6 @@ function updateGamesWithScores(
       if (matchNumber && updatedGame.matchNumber !== matchNumber) {
         updatedGame.matchNumber = matchNumber;
         hasChanges = true;
-      }
-
-      // AUTO-POPULATE OPPONENT RECORD from standings
-      const opponentRecord = getOpponentRecord(game.opponent, standings);
-      if (opponentRecord && updatedGame.opponentRecord !== opponentRecord) {
-        const oldRecord = updatedGame.opponentRecord || 'none';
-        updatedGame.opponentRecord = opponentRecord;
-        updates.push(
-          `📊 Opponent record updated for ${game.opponent}: ${oldRecord} → ${opponentRecord}`
-        );
-        hasChanges = true;
-      }
-
-      // AUTO-POPULATE OPPONENT RECENT RESULTS
-      // Note: Limited to matches we have in our schedule (matches involving Mercury)
-      // When full league schedule is available, this will show all opponent matches
-      const opponentRecentResults = getOpponentRecentResults(
-        game.opponent,
-        game.date,
-        scrapedMatches,
-        3
-      );
-      
-      // Only update if we have results and they're different
-      if (opponentRecentResults.length > 0) {
-        const existingResults = updatedGame.opponentRecentResults || [];
-        const resultsChanged = JSON.stringify(existingResults) !== JSON.stringify(opponentRecentResults);
-        
-        if (resultsChanged) {
-          updatedGame.opponentRecentResults = opponentRecentResults;
-          updates.push(
-            `📊 Opponent recent results updated for ${game.opponent} (${opponentRecentResults.length} matches)`
-          );
-          hasChanges = true;
-        }
       }
 
       const hasRecordedResult =
@@ -668,7 +480,7 @@ function logChanges(changes: string[]) {
 }
 
 async function main() {
-  console.log('🚀 Starting GotSport scraper (Enhanced with auto opponent data)...\n');
+  console.log('🚀 Starting GotSport scraper...\n');
 
   try {
     // Scrape current data
@@ -689,13 +501,12 @@ async function main() {
     // Detect changes in scraped data
     const scrapedChanges = detectChanges(previousData, currentData);
 
-    // Load and update games.json with new scores AND opponent data
-    console.log('\n🔄 Updating games.json with scores and opponent data...');
+    // Load and update games.json with new scores (preserving manual data)
+    console.log('\n🔄 Updating games.json with new scores...');
     const existingGames = loadExistingGames();
     const { games: updatedGames, updates: gameUpdates } = updateGamesWithScores(
       existingGames,
-      schedule,
-      standings
+      schedule
     );
 
     // Combine all changes
@@ -707,9 +518,9 @@ async function main() {
     // Save updated games.json (only if there were updates)
     if (gameUpdates.length > 0) {
       writeFileSync(GAMES_FILE, JSON.stringify(updatedGames, null, 2));
-      console.log(`\n💾 Updated games.json with ${gameUpdates.length} change(s)`);
+      console.log(`\n💾 Updated games.json with ${gameUpdates.length} score change(s)`);
     } else {
-      console.log('\n✅ No updates needed for games.json');
+      console.log('\n✅ No score updates needed for games.json');
     }
 
     // Save scraped data for future comparison
@@ -718,8 +529,6 @@ async function main() {
     console.log(`💾 Scraped data saved to ${dataFile}`);
 
     console.log('\n✅ Scraping completed successfully!');
-    console.log('\nℹ️  Note: Opponent recent results are limited to matches in our schedule.');
-    console.log('   For full opponent match history, the league-wide schedule would be needed.');
 
   } catch (error) {
     console.error('\n❌ Scraping failed:', error);
