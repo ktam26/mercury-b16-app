@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-10-14T07:44:54.202Z",
+  "timestamp": "2025-10-28T20:59:34.634Z",
   "standings": [
     {
       "position": 1,
@@ -15,6 +15,18 @@
     },
     {
       "position": 2,
+      "team": "Cupertino FC Cupertino FC Flames 16B",
+      "matchesPlayed": 6,
+      "wins": 3,
+      "losses": 2,
+      "draws": 1,
+      "goalsFor": 25,
+      "goalsAgainst": 19,
+      "goalDifference": 4,
+      "points": 10
+    },
+    {
+      "position": 3,
       "team": "East San Jose FC ESJFC 16B Latinos White",
       "matchesPlayed": 5,
       "wins": 3,
@@ -24,18 +36,6 @@
       "goalsAgainst": 14,
       "goalDifference": 4,
       "points": 9
-    },
-    {
-      "position": 3,
-      "team": "Cupertino FC Cupertino FC Flames 16B",
-      "matchesPlayed": 5,
-      "wins": 2,
-      "losses": 2,
-      "draws": 1,
-      "goalsFor": 19,
-      "goalsAgainst": 16,
-      "goalDifference": 1,
-      "points": 7
     },
     {
       "position": 4,
@@ -64,13 +64,13 @@
     {
       "position": 6,
       "team": "West Valley Soccer Club West Valley United 016B Red",
-      "matchesPlayed": 3,
+      "matchesPlayed": 4,
       "wins": 1,
-      "losses": 2,
+      "losses": 3,
       "draws": 0,
-      "goalsFor": 10,
-      "goalsAgainst": 11,
-      "goalDifference": -2,
+      "goalsFor": 13,
+      "goalsAgainst": 17,
+      "goalDifference": -5,
       "points": 3
     },
     {
