@@ -49,6 +49,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add data/gotsport-data.json data/gotsport-changes.json data/games.json
           git commit -m "Update GotSport data [automated]"
+          git pull --rebase origin main
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
