@@ -12,10 +12,10 @@ import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 const RESULTS_URL = 'https://system.gotsport.com/org_event/events/44142/results?group=384051';
-const SCHEDULE_URL = 'https://system.gotsport.com/org_event/events/44142/schedules?team=3231307';
 const DATA_DIR = join(__dirname, '..', 'data');
 const GAMES_FILE = join(DATA_DIR, 'games.json');
 const CHANGES_LOG = join(DATA_DIR, 'gotsport-changes.json');
+const LEAGUE_SCHEDULE_FILE = join(DATA_DIR, 'league-schedule.json');
 
 interface StandingsEntry {
   position: number;
@@ -117,68 +117,23 @@ async function scrapeStandings(): Promise<StandingsEntry[]> {
 }
 
 async function scrapeSchedule(): Promise<Match[]> {
-  console.log('🔍 Scraping schedule...');
+  console.log('📅 Loading full league schedule from static JSON...');
 
   try {
-    const response = await axios.get(SCHEDULE_URL);
-    const $ = cheerio.load(response.data);
+    if (!existsSync(LEAGUE_SCHEDULE_FILE)) {
+      console.log(`⚠️  League schedule file not found at ${LEAGUE_SCHEDULE_FILE}`);
+      console.log('ℹ️  Run: gemini "Parse PDF..." gotsport-schedule.pdf > data/league-schedule.json');
+      return [];
+    }
 
-    const matches: Match[] = [];
+    const content = readFileSync(LEAGUE_SCHEDULE_FILE, 'utf-8');
+    const matches: Match[] = JSON.parse(content);
 
-    // Find all tables, skip standings table (first one with 10 columns in header)
-    $('table').each((_, table) => {
-      // Check if this is a standings table by counting header columns
-      const headerCells = $(table).find('thead tr').first().find('th, td').length;
-      if (headerCells === 10) return; // Skip standings table
-
-      // Process match table rows
-      $(table).find('tbody tr').each((_, row) => {
-        const cells = $(row).find('td');
-        if (cells.length < 7) return;
-
-        // Check if first cell looks like a match number (digits only)
-        const matchNumber = $(cells[0]).text().trim();
-        if (!/^\d+$/.test(matchNumber)) return; // Skip if not a match number
-
-        const timeCell = $(cells[1]).text().trim();
-        const homeTeam = $(cells[2]).text().trim();
-        const score = $(cells[3]).text().trim();
-        const awayTeam = $(cells[4]).text().trim();
-        const location = $(cells[5]).text().trim();
-        const division = $(cells[6]).text().trim();
-
-        // Extract date, time, and status from the time cell
-        // Format: "Sep 07, 2025 2:15 PM PDT Scheduled" or "Sep 20, 2025 10:30 AM PDT"
-        // Or just "Sep 20, 2025 10:30 AM PDT"
-        const timeMatch = timeCell.match(/(\d{1,2}:\d{2}\s+[AP]M\s+[A-Z]{3})/);
-        const time = timeMatch ? timeMatch[1] : '';
-
-        // Extract date (everything before the time)
-        const date = time ? timeCell.substring(0, timeCell.indexOf(time)).trim() : '';
-
-        // Extract status (everything after the time)
-        const statusText = time ? timeCell.substring(timeCell.indexOf(time) + time.length).trim() : '';
-        const status = statusText || undefined;
-
-        matches.push({
-          matchNumber,
-          date,
-          time,
-          homeTeam,
-          awayTeam,
-          score,
-          location,
-          division,
-          status: status || undefined,
-        });
-      });
-    });
-
-    console.log(`✅ Scraped ${matches.length} matches from schedule`);
+    console.log(`✅ Loaded ${matches.length} matches from league schedule`);
     return matches;
 
   } catch (error) {
-    console.error('❌ Error scraping schedule:', error);
+    console.error('❌ Error loading league schedule:', error);
     throw error;
   }
 }
