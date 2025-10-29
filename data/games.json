@@ -314,12 +314,7 @@
     "homeAway": "away",
     "jersey": "white",
     "socks": "white",
-    "result": {
-      "us": 3,
-      "them": 1,
-      "goalScorers": [],
-      "assists": []
-    },
+    "result": null,
     "teamLogos": {
       "home": "/images/logos/bay-area-surf.png",
       "away": "/images/logos/mercury-b16.png"
@@ -393,12 +388,7 @@
     "homeAway": "home",
     "jersey": "black",
     "socks": "black",
-    "result": {
-      "us": 6,
-      "them": 0,
-      "goalScorers": [],
-      "assists": []
-    },
+    "result": null,
     "teamLogos": {
       "home": "/images/logos/mercury-b16.png",
       "away": "/images/logos/allstars-united.png"
@@ -472,12 +462,7 @@
     "homeAway": "away",
     "jersey": "white",
     "socks": "white",
-    "result": {
-      "us": 7,
-      "them": 5,
-      "goalScorers": [],
-      "assists": []
-    },
+    "result": null,
     "teamLogos": {
       "home": "/images/logos/west-valley-united.png",
       "away": "/images/logos/mercury-b16.png"
@@ -551,12 +536,7 @@
     "homeAway": "away",
     "jersey": "white",
     "socks": "white",
-    "result": {
-      "us": 3,
-      "them": 1,
-      "goalScorers": [],
-      "assists": []
-    },
+    "result": null,
     "teamLogos": {
       "home": "/images/logos/santa-clara-rush.png",
       "away": "/images/logos/mercury-b16.png"

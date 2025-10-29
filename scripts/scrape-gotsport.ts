@@ -377,20 +377,34 @@ function updateGamesWithScores(
           return game.matchNumber === matchNumber;
         }
 
+        // The scraped match date must be on or before today's date to be considered for an update
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set to start of day for consistent comparison
+        const scrapedDateObj = new Date(scrapedDate);
+        if (scrapedDateObj > today) {
+          return false; // Don't match future scraped dates
+        }
+
+        // If the game in games.json is in the future, don't match it
+        const gameDateObj = new Date(game.date);
+        if (gameDateObj > today) {
+          return false; // Never match future games
+        }
+
+        // Match if dates are identical
         if (scrapedDate && game.date === scrapedDate) {
           return true;
         }
 
-        // If the game already has a result, only match if dates are close (within 7 days)
-        if (game.result && scrapedDate) {
-          const existingDate = new Date(game.date);
-          const scrapedDateObj = new Date(scrapedDate);
-          const daysDiff = Math.abs((existingDate.getTime() - scrapedDateObj.getTime()) / (1000 * 60 * 60 * 24));
-          return daysDiff <= 7; // Only match if within 7 days
+        // For games without a result, allow matching within a 7-day window
+        // This handles minor date discrepancies or games rescheduled by a few days
+        if (!game.result && scrapedDate) {
+          const daysDiff = Math.abs((gameDateObj.getTime() - scrapedDateObj.getTime()) / (1000 * 60 * 60 * 24));
+          return daysDiff <= 7;
         }
 
-        // If no result yet, match by opponent name (it's likely the upcoming game)
-        return !game.result;
+        // No other conditions should result in a match
+        return false;
       });
     }
 
@@ -480,6 +494,16 @@ function updateGamesWithScores(
       if (match.score !== '-' && match.score) {
         const scoreMatch = match.score.match(/(\d+)\s*-\s*(\d+)/);
         if (scoreMatch) {
+          // FINAL SAFETY CHECK: Never apply scores to future games
+          const gameDate = new Date(updatedGame.date);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          if (gameDate > today) {
+            console.log(`⚠️  Skipping future game: ${game.opponent} on ${updatedGame.date}`);
+            return; // Don't apply score to future games
+          }
+
           const mercuryScore = isHome ? parseInt(scoreMatch[1]) : parseInt(scoreMatch[2]);
           const opponentScore = isHome ? parseInt(scoreMatch[2]) : parseInt(scoreMatch[1]);
 
