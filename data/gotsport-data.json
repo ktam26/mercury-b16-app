@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-04T07:04:27.790Z",
+  "timestamp": "2025-11-11T07:03:43.814Z",
   "standings": [
     {
       "position": 1,
@@ -27,18 +27,30 @@
     },
     {
       "position": 3,
-      "team": "East San Jose FC ESJFC 16B Latinos White",
-      "matchesPlayed": 5,
+      "team": "Santa Clara Rush 2016B Cougars - Blue",
+      "matchesPlayed": 6,
       "wins": 3,
-      "losses": 2,
+      "losses": 3,
       "draws": 0,
-      "goalsFor": 18,
+      "goalsFor": 16,
       "goalsAgainst": 14,
-      "goalDifference": 4,
+      "goalDifference": 2,
       "points": 9
     },
     {
       "position": 4,
+      "team": "East San Jose FC ESJFC 16B Latinos White",
+      "matchesPlayed": 6,
+      "wins": 3,
+      "losses": 3,
+      "draws": 0,
+      "goalsFor": 20,
+      "goalsAgainst": 19,
+      "goalDifference": 1,
+      "points": 9
+    },
+    {
+      "position": 5,
       "team": "Bay Area Surf 16B Academy I",
       "matchesPlayed": 5,
       "wins": 2,
@@ -50,19 +62,19 @@
       "points": 6
     },
     {
-      "position": 5,
+      "position": 6,
       "team": "Almaden FC Almaden FC Mercury B16 Black",
-      "matchesPlayed": 4,
+      "matchesPlayed": 5,
       "wins": 1,
-      "losses": 2,
+      "losses": 3,
       "draws": 1,
       "goalsFor": 9,
-      "goalsAgainst": 12,
-      "goalDifference": -3,
+      "goalsAgainst": 13,
+      "goalDifference": -4,
       "points": 4
     },
     {
-      "position": 6,
+      "position": 7,
       "team": "West Valley Soccer Club West Valley United 016B Red",
       "matchesPlayed": 4,
       "wins": 1,
@@ -74,7 +86,7 @@
       "points": 3
     },
     {
-      "position": 7,
+      "position": 8,
       "team": "Allstars United 16B Pre-Academy",
       "matchesPlayed": 4,
       "wins": 1,
@@ -83,18 +95,6 @@
       "goalsFor": 5,
       "goalsAgainst": 15,
       "goalDifference": -10,
-      "points": 3
-    },
-    {
-      "position": 8,
-      "team": "Santa Clara Rush 2016B Cougars - Blue",
-      "matchesPlayed": 4,
-      "wins": 1,
-      "losses": 3,
-      "draws": 0,
-      "goalsFor": 10,
-      "goalsAgainst": 12,
-      "goalDifference": -2,
       "points": 3
     }
   ],
